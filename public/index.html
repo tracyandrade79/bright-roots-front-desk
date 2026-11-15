@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bright Roots Dental, front desk chat</title>
+<meta name="description" content="Ask Bright Roots Dental about timings, prices, doctors, insurance or booking a visit.">
+<meta name="theme-color" content="#17604f">
+<link rel="icon" href="/assets/tooth.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/base.css">
+<link rel="stylesheet" href="/assets/chat.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="clinic-side" aria-label="Clinic details">
+    <svg class="side-mark" viewBox="0 0 40 40" aria-hidden="true"><use href="#tooth"/></svg>
+    <h1 class="side-name" id="side-name">Bright Roots Dental</h1>
+    <p class="side-lede">Ask the front desk anything about your visit. Replies come straight from the clinic's own details, and a real person steps in when needed.</p>
+    <dl class="side-facts" id="side-facts"></dl>
+  </aside>
+
+  <main class="chat" aria-label="Chat with the front desk">
+    <header class="top">
+      <svg class="mark logo-anim" viewBox="0 0 40 40" aria-hidden="true">
+        <path style="fill: var(--tooth, #17604f)" d="M12 5.5c-4.2 0-6.6 4.2-5.6 9.4.9 4.6 3.3 7.2 4.2 12.6.8 4.8 1.9 8 4.1 8 2.4 0 2.6-5 3.6-8.4.4-1.4 1-2.1 1.7-2.1s1.3.7 1.7 2.1c1 3.4 1.2 8.4 3.6 8.4 2.2 0 3.3-3.2 4.1-8 .9-5.4 3.3-8 4.2-12.6 1-5.2-1.4-9.4-5.6-9.4-3.2 0-4.6 2-8 2s-4.8-2-8-2Z"/>
+        <path fill="none" stroke="#d5eee4" stroke-width="1.6" stroke-linecap="round" d="M11.5 11.5c1.2-1.6 3-2.1 4.6-1.6"/>
+        <circle class="spark" cx="31.5" cy="7" r="3" style="fill: var(--turmeric)"/>
+        <path class="spark-ray" d="M31.5 1v2M31.5 11v2M25.5 7h2M35.5 7h2" stroke="var(--turmeric)" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <div class="top-text">
+        <div class="clinic-name" id="clinic-name">Bright Roots Dental</div>
+        <div class="clinic-sub">Front desk, Banjara Hills</div>
+      </div>
+      <a class="call" id="call-btn" href="tel:04055500123" aria-label="Call the clinic">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+        <span>Call</span>
+      </a>
+    </header>
+
+    <section class="today" id="today" aria-live="polite">
+      <div class="today-row">
+        <span class="today-dot" id="today-dot"></span>
+        <span class="today-status" id="today-status">Checking today's timings</span>
+      </div>
+      <div class="dayline" id="dayline" aria-hidden="true">
+        <div class="dayline-track"></div>
+      </div>
+      <div class="dayline-scale" aria-hidden="true"><span style="left:0">8 am</span><span style="left:30.77%">12 pm</span><span style="left:61.54%">4 pm</span><span style="left:100%">9 pm</span></div>
+    </section>
+
+    <div class="log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions">
+      <div class="welcome" id="welcome">
+        <p class="welcome-hi" id="welcome-hi">Hello! How can we help you today?</p>
+        <p class="welcome-body" id="welcome-body">Ask about timings, prices, doctors, insurance or booking a visit. You can write in English, हिंदी or తెలుగు.</p>
+        <div class="lang" role="group" aria-label="Language for quick buttons">
+          <button type="button" data-lang="en" aria-pressed="true">English</button>
+          <button type="button" data-lang="hi" aria-pressed="false">हिंदी</button>
+          <button type="button" data-lang="te" aria-pressed="false">తెలుగు</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="chips" id="quick-replies" aria-label="Quick questions"></div>
+
+    <form class="composer" id="composer" autocomplete="off">
+      <label for="chat-input" class="sr-only">Type your question</label>
+      <textarea id="chat-input" rows="1" placeholder="Type your question" maxlength="1000" enterkeyhint="send"></textarea>
+      <button type="submit" id="chat-send" class="send" aria-label="Send">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3.4 20.4 21 12 3.4 3.6l-.01 6.53L15 12 3.39 13.87z"/></svg>
+      </button>
+    </form>
+    <div class="foot"><button type="button" class="linkish" id="new-chat">Start a new chat</button></div>
+  </main>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tooth" viewBox="0 0 40 40">
+    <path style="fill: var(--tooth, #17604f)" d="M12 5.5c-4.2 0-6.6 4.2-5.6 9.4.9 4.6 3.3 7.2 4.2 12.6.8 4.8 1.9 8 4.1 8 2.4 0 2.6-5 3.6-8.4.4-1.4 1-2.1 1.7-2.1s1.3.7 1.7 2.1c1 3.4 1.2 8.4 3.6 8.4 2.2 0 3.3-3.2 4.1-8 .9-5.4 3.3-8 4.2-12.6 1-5.2-1.4-9.4-5.6-9.4-3.2 0-4.6 2-8 2s-4.8-2-8-2Z"/>
+    <path fill="none" stroke="#d5eee4" stroke-width="1.6" stroke-linecap="round" d="M11.5 11.5c1.2-1.6 3-2.1 4.6-1.6"/>
+    <circle cx="31.5" cy="7" r="3" fill="#e3a13a"/>
+  </symbol>
+</svg>
+<script src="/assets/chat.js"></script>
+</body>
+</html>

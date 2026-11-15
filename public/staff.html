@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Front desk, staff | Bright Roots Dental</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/tooth.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/base.css">
+<link rel="stylesheet" href="/assets/staff.css">
+</head>
+<body>
+<header class="bar">
+  <div class="brand">
+    <img src="/assets/tooth.svg" class="mark" alt="">
+    <div><div class="brand-name">Front desk</div><div class="brand-sub" id="brand-sub">Bright Roots Dental, staff</div></div>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="tickets">Tickets <span class="count" id="open-count">0</span></button>
+    <button role="tab" aria-selected="false" data-tab="clinic">Clinic details</button>
+    <button role="tab" aria-selected="false" data-tab="checks">Checks</button>
+  </nav>
+  <div class="ai-state" id="ai-state" title="AI status">AI: checking</div>
+</header>
+
+<main>
+  <!-- Tickets -->
+  <section class="panel" id="tab-tickets">
+    <div class="pulse" id="pulse">
+      <span class="stat urgent"><b id="n-urgent">0</b> urgent</span>
+      <span class="stat waiting"><b id="n-waiting">0</b> waiting for a person</span>
+      <span class="stat booking"><b id="n-booking">0</b> booking requests</span>
+      <span class="stat overdue"><b id="n-overdue">0</b> past the callback time</span>
+      <span class="stat done"><b id="n-answered">0</b> answered</span>
+    </div>
+    <div class="filters" role="group" aria-label="Show tickets">
+      <button data-filter="all" aria-pressed="true">All</button>
+      <button data-filter="open" aria-pressed="false">Open</button>
+      <button data-filter="answered" aria-pressed="false">Answered</button>
+      <button data-filter="closed" aria-pressed="false">Closed</button>
+      <label class="sound"><input type="checkbox" id="sound" checked> Sound for urgent tickets</label>
+    </div>
+    <ol id="ticket-queue" class="queue" aria-live="polite"></ol>
+    <div class="empty" id="empty" hidden>
+      <p class="empty-big">No tickets yet.</p>
+      <p>When the chat can't answer a question, or a patient asks to book or has an emergency, the ticket shows up here. Try it: open the <a href="/" target="_blank">patient chat</a> and ask "Do you do Invisalign?"</p>
+    </div>
+  </section>
+
+  <!-- Clinic details -->
+  <section class="panel" id="tab-clinic" hidden>
+    <div class="clinic-head">
+      <div>
+        <h2>Clinic details</h2>
+        <p class="muted">The chat answers only from these details. Changes apply to the next message a patient sends.</p>
+      </div>
+      <div class="clinic-actions">
+        <button class="btn ghost" id="raw-toggle" type="button">Edit as JSON</button>
+        <button class="btn ghost" id="reset-clinic" type="button">Restore original</button>
+        <button class="btn" id="save-clinic" type="button">Save changes</button>
+      </div>
+    </div>
+    <div class="save-msg" id="save-msg" role="status"></div>
+    <form id="clinic-form" class="clinic-form"></form>
+    <textarea id="clinic-raw" class="raw" hidden spellcheck="false" aria-label="Clinic details as JSON"></textarea>
+  </section>
+
+  <!-- Checks -->
+  <section class="panel" id="tab-checks" hidden>
+    <h2>Checks</h2>
+    <p class="muted">Runs the practice questions through the chat without creating real tickets. Run it after every change to the clinic details.</p>
+    <div class="check-actions">
+      <button class="btn" id="run-file" type="button">Run checks, clinic file only</button>
+      <button class="btn ghost" id="run-ai" type="button">Run checks with AI</button>
+    </div>
+    <div id="check-out"></div>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="assertive" hidden></div>
+<dialog id="pin-dialog">
+  <form method="dialog" id="pin-form">
+    <h2>Staff PIN</h2>
+    <p class="muted">Enter the staff PIN to see tickets.</p>
+    <input id="pin-input" type="password" inputmode="numeric" autocomplete="current-password" aria-label="Staff PIN">
+    <button class="btn" type="submit">Open</button>
+  </form>
+</dialog>
+<script src="/assets/staff.js"></script>
+</body>
+</html>

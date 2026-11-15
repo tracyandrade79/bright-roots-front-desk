@@ -1,0 +1,13 @@
+{
+  "name": "bright-roots-front-desk",
+  "version": "1.0.0",
+  "description": "Front desk chat for Bright Roots Dental: answers from the clinic file, hands hard questions to a person.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/run-checks.js"
+  },
+  "engines": { "node": ">=18" },
+  "license": "UNLICENSED",
+  "private": true
+}
