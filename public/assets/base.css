@@ -1,18 +1,19 @@
 /* Bright Roots front desk: shared look for patient and staff pages */
 :root {
-  --paper: #eef4f1;      /* enamel white with a mint tint */
+  --paper: #f4fafe;      /* soft sky white */
   --surface: #ffffff;
-  --ink: #0f2b29;        /* deep pine, for text */
-  --ink-soft: #4a625f;
-  --pine: #17604f;       /* main action colour */
-  --pine-deep: #0e4538;
-  --mint: #d5eee4;       /* bot bubble */
-  --mint-line: #b7dccd;
-  --turmeric: #e3a13a;   /* needs a person / booking */
-  --turmeric-soft: #fbefd9;
-  --chili: #b93226;      /* urgent */
-  --chili-soft: #fbe3df;
-  --line: #cfe0da;
+  --ink: #0e2a3d;        /* deep navy, for text */
+  --ink-soft: #4a6475;
+  --pine: #1679b7;       /* main colour: sky blue */
+  --pine-deep: #0f5a8a;
+  --mint: #dff1fb;       /* bot bubble: light sky */
+  --mint-line: #b9dff4;
+  --turmeric: #ffc23d;   /* accent: sunshine yellow */
+  --turmeric-soft: #fff4d6;
+  --chili: #e0322b;      /* urgent: bright red */
+  --chili-soft: #fde2e0;
+  --line: #d4e8f4;
+  --accent-ink: color-mix(in srgb, var(--turmeric) 45%, #000); /* dark text on accent tint */
   --radius-bubble: 18px;
   --display: "Bricolage Grotesque", "Atkinson Hyperlegible", system-ui, sans-serif;
   --body: "Atkinson Hyperlegible", "Noto Sans Devanagari", "Noto Sans Telugu", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -31,4 +32,9 @@ button { cursor: pointer; }
 .btn.ghost:hover { background: var(--mint); }
 .btn.warn { background: var(--chili); }
 .btn[disabled] { opacity: .5; cursor: not-allowed; }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+/* People who turn on "reduce motion" on their phone or computer get calmer pages:
+   nothing moves around, but gentle glows and sparkles stay. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+  .row.enter, .welcome > *, .chips.intro .chip, .buddy-body, .buddy .brush, .logo-anim .logo-body, .photo-main, .photo-second, .photo-badge, .glare::after, .scene .tree, .scene .cloud, .scene .sun-rays, .scene .shine, .urgent-call, .ticket, .brand .mark { animation: none !important; }
+}

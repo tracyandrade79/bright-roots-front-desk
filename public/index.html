@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bright Roots Dental, front desk chat</title>
 <meta name="description" content="Ask Bright Roots Dental about timings, prices, doctors, insurance or booking a visit.">
-<meta name="theme-color" content="#17604f">
+<meta name="theme-color" content="#1679b7">
 <link rel="icon" href="/assets/tooth.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,51 +15,155 @@
 </head>
 <body>
 <div class="layout">
+  <!-- Wide screens only: clinic details and a picture of the clinic -->
   <aside class="clinic-side" aria-label="Clinic details">
-    <svg class="side-mark" viewBox="0 0 40 40" aria-hidden="true"><use href="#tooth"/></svg>
+    <figure class="photos" id="photos">
+      <div class="photo-main glare">
+        <img src="https://images.unsplash.com/photo-1643660527071-52e37cf7c7ea?fm=jpg&q=70&fit=crop&auto=format&w=900" srcset="https://images.unsplash.com/photo-1643660527071-52e37cf7c7ea?fm=jpg&q=70&fit=crop&auto=format&w=600 600w, https://images.unsplash.com/photo-1643660527071-52e37cf7c7ea?fm=jpg&q=70&fit=crop&auto=format&w=900 900w, https://images.unsplash.com/photo-1643660527071-52e37cf7c7ea?fm=jpg&q=70&fit=crop&auto=format&w=1300 1300w" sizes="420px" alt="A bright dental room with a blue dental chair and equipment" width="900" height="675" loading="eager">
+      </div>
+      <div class="photo-second glare g2">
+        <img src="https://images.unsplash.com/photo-1643660526741-094639fbe53a?fm=jpg&q=70&fit=crop&auto=format&w=600" alt="A dental chair in a calm treatment room" width="600" height="450" loading="lazy">
+      </div>
+      <span class="photo-badge" aria-hidden="true"><svg viewBox="0 0 40 40"><path fill="#fff" d="M12 5.5c-4.2 0-6.6 4.2-5.6 9.4.9 4.6 3.3 7.2 4.2 12.6.8 4.8 1.9 8 4.1 8 2.4 0 2.6-5 3.6-8.4.4-1.4 1-2.1 1.7-2.1s1.3.7 1.7 2.1c1 3.4 1.2 8.4 3.6 8.4 2.2 0 3.3-3.2 4.1-8 .9-5.4 3.3-8 4.2-12.6 1-5.2-1.4-9.4-5.6-9.4-3.2 0-4.6 2-8 2s-4.8-2-8-2Z"/></svg></span>
+      <figcaption class="credit">Photos: <a href="https://unsplash.com/photos/a-dental-room-with-a-blue-chair-and-dental-equipment-AQG6C_xYEpA" target="_blank" rel="noopener">Ozkan Guner</a> on <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash</a></figcaption>
+    </figure>
+    <svg class="scene" viewBox="0 0 360 200" role="img" aria-label="Drawing of the clinic on a sunny day">
+      <defs>
+        <radialGradient id="g-sun" cx="35%" cy="32%" r="75%"><stop offset="0" stop-color="#fffbe6"/><stop offset=".35" style="stop-color: color-mix(in srgb, var(--turmeric) 70%, #fff)"/><stop offset=".8" style="stop-color: var(--turmeric)"/><stop offset="1" style="stop-color: color-mix(in srgb, var(--turmeric) 75%, #a35a00)"/></radialGradient>
+        <radialGradient id="g-glow"><stop offset="0" style="stop-color: var(--turmeric)" stop-opacity=".55"/><stop offset="1" style="stop-color: var(--turmeric)" stop-opacity="0"/></radialGradient>
+        <linearGradient id="g-front" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" style="stop-color: color-mix(in srgb, var(--paper) 85%, var(--pine))"/></linearGradient>
+        <linearGradient id="g-side" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color: color-mix(in srgb, var(--paper) 72%, var(--pine))"/><stop offset="1" style="stop-color: color-mix(in srgb, var(--paper) 55%, var(--pine-deep))"/></linearGradient>
+        <linearGradient id="g-roof" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color: color-mix(in srgb, var(--turmeric) 70%, #fff)"/><stop offset="1" style="stop-color: var(--turmeric)"/></linearGradient>
+        <linearGradient id="g-roof-side" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color: color-mix(in srgb, var(--turmeric) 80%, #7a4300)"/><stop offset="1" style="stop-color: color-mix(in srgb, var(--turmeric) 60%, #5a3000)"/></linearGradient>
+        <linearGradient id="g-glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color: color-mix(in srgb, var(--mint) 60%, #fff)"/><stop offset=".55" style="stop-color: var(--mint-line)"/><stop offset="1" style="stop-color: color-mix(in srgb, var(--pine) 55%, var(--mint))"/></linearGradient>
+        <linearGradient id="g-door" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color: color-mix(in srgb, var(--pine) 80%, #fff)"/><stop offset="1" style="stop-color: var(--pine-deep)"/></linearGradient>
+        <linearGradient id="g-sign" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color: color-mix(in srgb, var(--pine) 75%, #fff)"/><stop offset="1" style="stop-color: var(--pine-deep)"/></linearGradient>
+        <radialGradient id="g-tree" cx="35%" cy="30%" r="75%"><stop offset="0" style="stop-color: color-mix(in srgb, var(--pine) 35%, #fff)"/><stop offset=".6" style="stop-color: color-mix(in srgb, var(--pine) 75%, #fff)"/><stop offset="1" style="stop-color: var(--pine-deep)"/></radialGradient>
+        <linearGradient id="g-cloud" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" style="stop-color: var(--mint)"/></linearGradient>
+        <linearGradient id="g-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <filter id="f-blur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+        <clipPath id="c-win1"><rect x="104" y="112" width="34" height="28" rx="4"/></clipPath>
+        <clipPath id="c-win2"><rect x="192" y="112" width="34" height="28" rx="4"/></clipPath>
+        <clipPath id="c-sign"><rect x="122" y="82" width="86" height="24" rx="12"/></clipPath>
+      </defs>
+
+      <!-- sun with glow and a shiny highlight -->
+      <circle class="sun-glow" cx="306" cy="46" r="42" fill="url(#g-glow)"/>
+      <g class="sun-rays" style="stroke: var(--turmeric)" stroke-width="3.5" stroke-linecap="round" opacity=".9"><path d="M306 10v-7M306 89v-7M270 46h-7M349 46h-7M280 20l-5-5M337 77l-5-5M280 72l-5 5M337 15l-5 5"/></g>
+      <circle cx="306" cy="46" r="20" fill="url(#g-sun)"/>
+      <ellipse cx="299" cy="38" rx="6" ry="3.5" fill="#fff" opacity=".75" transform="rotate(-30 299 38)"/>
+
+      <!-- clouds -->
+      <g class="cloud c1"><ellipse cx="64" cy="44" rx="24" ry="11" fill="url(#g-cloud)"/><ellipse cx="80" cy="37" rx="15" ry="11" fill="url(#g-cloud)"/><ellipse cx="62" cy="40" rx="10" ry="4" fill="#fff" opacity=".9"/></g>
+      <g class="cloud c2" opacity=".75"><ellipse cx="200" cy="24" rx="17" ry="7.5" fill="url(#g-cloud)"/><ellipse cx="212" cy="19" rx="10" ry="7.5" fill="url(#g-cloud)"/></g>
+
+      <!-- ground and soft shadow under the clinic -->
+      <ellipse cx="180" cy="182" rx="170" ry="15" style="fill: color-mix(in srgb, var(--pine-deep) 80%, #000)" opacity=".55"/>
+      <ellipse cx="190" cy="174" rx="112" ry="9" fill="#000" opacity=".35" filter="url(#f-blur)"/>
+
+      <!-- clinic: side wall, front wall, roof (3D) -->
+      <polygon points="240,74 280,56 280,158 240,174" fill="url(#g-side)"/>
+      <rect x="88" y="74" width="152" height="100" fill="url(#g-front)"/>
+      <polygon points="166,30 206,12 292,58 252,76" fill="url(#g-roof-side)"/>
+      <polygon points="76,78 166,30 252,76" fill="url(#g-roof)"/>
+      <path d="M76 78 166 30 252 76" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round" opacity=".55"/>
+      <polygon points="250,104 270,95 270,121 250,130" fill="url(#g-glass)"/>
+      <polygon points="252,106 258,103 254,126 251,127" fill="#fff" opacity=".55"/>
+
+      <!-- sign with a moving shine -->
+      <rect x="122" y="82" width="86" height="24" rx="12" fill="url(#g-sign)"/>
+      <path transform="translate(131 85) scale(.45)" fill="#fff" d="M12 5.5c-4.2 0-6.6 4.2-5.6 9.4.9 4.6 3.3 7.2 4.2 12.6.8 4.8 1.9 8 4.1 8 2.4 0 2.6-5 3.6-8.4.4-1.4 1-2.1 1.7-2.1s1.3.7 1.7 2.1c1 3.4 1.2 8.4 3.6 8.4 2.2 0 3.3-3.2 4.1-8 .9-5.4 3.3-8 4.2-12.6 1-5.2-1.4-9.4-5.6-9.4-3.2 0-4.6 2-8 2s-4.8-2-8-2Z"/>
+      <rect x="153" y="90" width="44" height="3.2" rx="1.6" fill="#fff"/><rect x="153" y="96" width="30" height="3.2" rx="1.6" fill="#fff" opacity=".7"/>
+      <g clip-path="url(#c-sign)"><rect class="shine" x="100" y="78" width="24" height="32" fill="url(#g-shine)" transform="skewX(-20)"/></g>
+
+      <!-- windows with glass reflections -->
+      <rect x="104" y="112" width="34" height="28" rx="4" fill="url(#g-glass)"/>
+      <rect x="192" y="112" width="34" height="28" rx="4" fill="url(#g-glass)"/>
+      <g clip-path="url(#c-win1)"><polygon points="104,140 116,112 124,112 112,140" fill="#fff" opacity=".6"/><rect class="shine s2" x="86" y="108" width="14" height="36" fill="url(#g-shine)" transform="skewX(-20)"/></g>
+      <g clip-path="url(#c-win2)"><polygon points="192,140 204,112 212,112 200,140" fill="#fff" opacity=".6"/><rect class="shine s3" x="174" y="108" width="14" height="36" fill="url(#g-shine)" transform="skewX(-20)"/></g>
+      <g stroke="#fff" stroke-width="2.4"><path d="M121 112v28M104 126h34M209 112v28M192 126h34"/></g>
+      <rect x="102" y="140" width="38" height="4" rx="2" style="fill: color-mix(in srgb, var(--paper) 70%, var(--pine))"/>
+      <rect x="190" y="140" width="38" height="4" rx="2" style="fill: color-mix(in srgb, var(--paper) 70%, var(--pine))"/>
+
+      <!-- door -->
+      <rect x="148" y="118" width="34" height="56" rx="5" fill="url(#g-door)"/>
+      <rect x="152" y="122" width="12" height="48" rx="3" fill="#fff" opacity=".14"/>
+      <circle cx="175" cy="148" r="2.6" style="fill: var(--turmeric)"/><circle cx="174.3" cy="147.3" r=".9" fill="#fff"/>
+      <rect x="142" y="173" width="46" height="5" rx="2" style="fill: color-mix(in srgb, var(--paper) 60%, var(--pine))"/>
+
+      <!-- trees with round shading -->
+      <g class="tree t1"><ellipse cx="54" cy="174" rx="18" ry="4" fill="#000" opacity=".25"/><rect x="50" y="126" width="7" height="48" rx="3" style="fill: color-mix(in srgb, var(--turmeric) 35%, #4a2e12)"/><circle cx="53" cy="116" r="25" fill="url(#g-tree)"/><ellipse cx="45" cy="105" rx="8" ry="5" fill="#fff" opacity=".35"/></g>
+      <g class="tree t2"><ellipse cx="318" cy="174" rx="14" ry="3.5" fill="#000" opacity=".25"/><rect x="315" y="136" width="6" height="38" rx="3" style="fill: color-mix(in srgb, var(--turmeric) 35%, #4a2e12)"/><circle cx="318" cy="127" r="20" fill="url(#g-tree)"/><ellipse cx="312" cy="118" rx="6" ry="4" fill="#fff" opacity=".35"/></g>
+
+      <g style="fill: #fff"><path class="twinkle" d="M118 46l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/><path class="twinkle d2" d="M250 40l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z"/><path class="twinkle d3" d="M30 80l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z"/></g>
+    </svg>
     <h1 class="side-name" id="side-name">Bright Roots Dental</h1>
-    <p class="side-lede">Ask the front desk anything about your visit. Replies come straight from the clinic's own details, and a real person steps in when needed.</p>
+    <p class="side-lede" data-i18n="lede">Ask the front desk anything about your visit. Replies come straight from the clinic's own details, and a real person steps in when needed.</p>
     <dl class="side-facts" id="side-facts"></dl>
+    <div class="team" id="side-team"></div>
   </aside>
 
   <main class="chat" aria-label="Chat with the front desk">
     <header class="top">
       <svg class="mark logo-anim" viewBox="0 0 40 40" aria-hidden="true">
-        <path style="fill: var(--tooth, #17604f)" d="M12 5.5c-4.2 0-6.6 4.2-5.6 9.4.9 4.6 3.3 7.2 4.2 12.6.8 4.8 1.9 8 4.1 8 2.4 0 2.6-5 3.6-8.4.4-1.4 1-2.1 1.7-2.1s1.3.7 1.7 2.1c1 3.4 1.2 8.4 3.6 8.4 2.2 0 3.3-3.2 4.1-8 .9-5.4 3.3-8 4.2-12.6 1-5.2-1.4-9.4-5.6-9.4-3.2 0-4.6 2-8 2s-4.8-2-8-2Z"/>
-        <path fill="none" stroke="#d5eee4" stroke-width="1.6" stroke-linecap="round" d="M11.5 11.5c1.2-1.6 3-2.1 4.6-1.6"/>
+        <g class="logo-body">
+          <path style="fill: var(--pine)" d="M12 5.5c-4.2 0-6.6 4.2-5.6 9.4.9 4.6 3.3 7.2 4.2 12.6.8 4.8 1.9 8 4.1 8 2.4 0 2.6-5 3.6-8.4.4-1.4 1-2.1 1.7-2.1s1.3.7 1.7 2.1c1 3.4 1.2 8.4 3.6 8.4 2.2 0 3.3-3.2 4.1-8 .9-5.4 3.3-8 4.2-12.6 1-5.2-1.4-9.4-5.6-9.4-3.2 0-4.6 2-8 2s-4.8-2-8-2Z"/>
+          <path fill="none" style="stroke: var(--mint)" stroke-width="1.6" stroke-linecap="round" d="M11.5 11.5c1.2-1.6 3-2.1 4.6-1.6"/>
+        </g>
         <circle class="spark" cx="31.5" cy="7" r="3" style="fill: var(--turmeric)"/>
-        <path class="spark-ray" d="M31.5 1v2M31.5 11v2M25.5 7h2M35.5 7h2" stroke="var(--turmeric)" stroke-width="1.4" stroke-linecap="round"/>
+        <path class="spark-ray" d="M31.5 0.5v3M31.5 10.5v3M25 7h3M35 7h3" style="stroke: var(--turmeric)" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
       <div class="top-text">
         <div class="clinic-name" id="clinic-name">Bright Roots Dental</div>
-        <div class="clinic-sub">Front desk, Banjara Hills</div>
+        <div class="clinic-sub" data-i18n="sub">Front desk, Banjara Hills</div>
       </div>
       <a class="call" id="call-btn" href="tel:04055500123" aria-label="Call the clinic">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
-        <span>Call</span>
+        <span data-i18n="call">Call</span>
       </a>
     </header>
 
-    <section class="today" id="today" aria-live="polite">
+    <section class="today" id="today">
       <div class="today-row">
         <span class="today-dot" id="today-dot"></span>
-        <span class="today-status" id="today-status">Checking today's timings</span>
+        <span class="today-status" id="today-status" aria-live="polite">Checking today's timings</span>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-lang="en" aria-pressed="true" title="English">EN</button>
+          <button type="button" data-lang="hi" aria-pressed="false" title="हिंदी">हिं</button>
+          <button type="button" data-lang="te" aria-pressed="false" title="తెలుగు">తె</button>
+        </div>
       </div>
-      <div class="dayline" id="dayline" aria-hidden="true">
-        <div class="dayline-track"></div>
-      </div>
+      <div class="dayline" id="dayline" aria-hidden="true"><div class="dayline-track"></div></div>
       <div class="dayline-scale" aria-hidden="true"><span style="left:0">8 am</span><span style="left:30.77%">12 pm</span><span style="left:61.54%">4 pm</span><span style="left:100%">9 pm</span></div>
     </section>
 
     <div class="log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions">
       <div class="welcome" id="welcome">
-        <p class="welcome-hi" id="welcome-hi">Hello! How can we help you today?</p>
-        <p class="welcome-body" id="welcome-body">Ask about timings, prices, doctors, insurance or booking a visit. You can write in English, हिंदी or తెలుగు.</p>
-        <div class="lang" role="group" aria-label="Language for quick buttons">
-          <button type="button" data-lang="en" aria-pressed="true">English</button>
-          <button type="button" data-lang="hi" aria-pressed="false">हिंदी</button>
-          <button type="button" data-lang="te" aria-pressed="false">తెలుగు</button>
-        </div>
+        <svg class="buddy" viewBox="0 0 160 150" role="img" aria-label="A smiling tooth holding a toothbrush">
+          <ellipse class="buddy-shadow" cx="72" cy="142" rx="34" ry="5" style="fill: var(--ink)" opacity=".1"/>
+          <g class="buddy-body">
+            <g transform="translate(18 2) scale(2.7)">
+              <path style="fill: #fff; stroke: var(--pine)" stroke-width="1.1" stroke-linejoin="round" d="M12 5.5c-4.2 0-6.6 4.2-5.6 9.4.9 4.6 3.3 7.2 4.2 12.6.8 4.8 1.9 8 4.1 8 2.4 0 2.6-5 3.6-8.4.4-1.4 1-2.1 1.7-2.1s1.3.7 1.7 2.1c1 3.4 1.2 8.4 3.6 8.4 2.2 0 3.3-3.2 4.1-8 .9-5.4 3.3-8 4.2-12.6 1-5.2-1.4-9.4-5.6-9.4-3.2 0-4.6 2-8 2s-4.8-2-8-2Z"/>
+              <path fill="none" style="stroke: var(--mint)" stroke-width="1.4" stroke-linecap="round" d="M10.5 11c1.2-1.8 3.2-2.4 5-1.9"/>
+              <g class="eyes" style="fill: var(--ink)"><ellipse cx="15.5" cy="16.5" rx="1.3" ry="1.6"/><ellipse cx="24.5" cy="16.5" rx="1.3" ry="1.6"/></g>
+              <path d="M16.8 20.6c1.8 2.2 4.6 2.2 6.4 0" fill="none" style="stroke: var(--ink)" stroke-width=".95" stroke-linecap="round"/>
+              <g style="fill: var(--turmeric)" opacity=".45"><circle cx="12.8" cy="20" r="1.7"/><circle cx="27.2" cy="20" r="1.7"/></g>
+            </g>
+            <g class="brush">
+              <rect x="112" y="60" width="9" height="62" rx="4.5" style="fill: var(--turmeric)" transform="rotate(18 116 91)"/>
+              <rect x="114" y="44" width="14" height="22" rx="3" style="fill: var(--pine)" transform="rotate(18 116 91)"/>
+              <g transform="rotate(18 116 91)" style="stroke: #fff" stroke-width="1.6"><path d="M117 47v16M121 47v16M125 47v16"/></g>
+            </g>
+          </g>
+          <g style="fill: var(--turmeric)">
+            <path class="twinkle" d="M138 22l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z"/>
+            <path class="twinkle d2" d="M14 46l2 4.5 4.5 2-4.5 2-2 4.5-2-4.5-4.5-2 4.5-2z"/>
+            <path class="twinkle d3" d="M150 74l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z"/>
+          </g>
+        </svg>
+        <p class="welcome-hi" data-i18n="hi">Hello! How can we help you today?</p>
+        <p class="welcome-body" data-i18n="body">Ask about timings, prices, doctors, insurance or booking a visit. You can write in English, हिंदी or తెలుగు.</p>
+        <div class="team team-mobile" id="team"></div>
       </div>
     </div>
 
@@ -72,17 +176,9 @@
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3.4 20.4 21 12 3.4 3.6l-.01 6.53L15 12 3.39 13.87z"/></svg>
       </button>
     </form>
-    <div class="foot"><button type="button" class="linkish" id="new-chat">Start a new chat</button></div>
+    <div class="foot"><button type="button" class="linkish" id="new-chat" data-i18n="newchat">Start a new chat</button></div>
   </main>
 </div>
-
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="tooth" viewBox="0 0 40 40">
-    <path style="fill: var(--tooth, #17604f)" d="M12 5.5c-4.2 0-6.6 4.2-5.6 9.4.9 4.6 3.3 7.2 4.2 12.6.8 4.8 1.9 8 4.1 8 2.4 0 2.6-5 3.6-8.4.4-1.4 1-2.1 1.7-2.1s1.3.7 1.7 2.1c1 3.4 1.2 8.4 3.6 8.4 2.2 0 3.3-3.2 4.1-8 .9-5.4 3.3-8 4.2-12.6 1-5.2-1.4-9.4-5.6-9.4-3.2 0-4.6 2-8 2s-4.8-2-8-2Z"/>
-    <path fill="none" stroke="#d5eee4" stroke-width="1.6" stroke-linecap="round" d="M11.5 11.5c1.2-1.6 3-2.1 4.6-1.6"/>
-    <circle cx="31.5" cy="7" r="3" fill="#e3a13a"/>
-  </symbol>
-</svg>
 <script src="/assets/chat.js"></script>
 </body>
 </html>

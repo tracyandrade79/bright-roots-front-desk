@@ -81,13 +81,13 @@ function ticketList() {
 }
 
 // ---------- chat ----------
-async function handleChat(sessionId, text) {
+async function handleChat(sessionId, text, prefLang) {
   const s = store.session(sessionId);
   const data = store.clinic();
   const history = s.messages.slice(-8).map((m) => ({ role: m.role, text: m.text }));
   store.addMessage(sessionId, { role: 'patient', text });
   const r = await engine.reply(text, {
-    data, session: s, history,
+    data, session: s, history, prefLang,
     ai: ai.config() ? ai.ask : null,
     createTicket: (f) => store.createTicket(sessionId, f),
     saveContact: (id, c) => { s.contact = { ...s.contact, ...c }; store.updateTicket(id, { contact: { ...(store.ticket(id) || {}).contact, ...c } }); },
@@ -118,14 +118,14 @@ const server = http.createServer(async (req, res) => {
     // ---- patient API ----
     if (req.method === 'GET' && p === '/api/clinic/public') {
       const d = store.clinic(), c = d.clinic || {};
-      return send(res, 200, { name: c.name, phone: c.phone, whatsapp: c.whatsapp, emergency_phone: c.emergency_phone, address: c.address, landmark: c.landmark, today: engine.todayStatus(d), quick: engine.QUICK, services: (d.services || []).map((x) => x.name), ai: ai.info().configured, version: d.updated_at || null });
+      return send(res, 200, { name: c.name, phone: c.phone, whatsapp: c.whatsapp, emergency_phone: c.emergency_phone, address: c.address, landmark: c.landmark, today: engine.todayStatus(d), quick: engine.QUICK, services: (d.services || []).map((x) => x.name), doctors: (d.doctors || []).map((x) => ({ name: x.name, role: x.role, days: x.days })), ai: ai.info().configured, version: d.updated_at || null });
     }
     if (req.method === 'POST' && p === '/api/chat') {
       if (limited(ip)) return send(res, 429, { error: 'Too many messages. Please wait a minute.' });
       const b = await body(req);
       const text = String(b.text || '').trim().slice(0, 1000);
       if (!validSession(b.session) || !text) return send(res, 400, { error: 'Send a session id and a message.' });
-      return send(res, 200, { message: await handleChat(b.session, text) });
+      return send(res, 200, { message: await handleChat(b.session, text, ['en', 'hi', 'te'].includes(b.lang) ? b.lang : 'en') });
     }
     if (req.method === 'GET' && p === '/api/messages') {
       const id = url.searchParams.get('session'), after = +url.searchParams.get('after') || 0;

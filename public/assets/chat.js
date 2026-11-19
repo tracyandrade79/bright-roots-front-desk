@@ -6,11 +6,37 @@
   const seen = new Set();
   let lastId = 0, busy = false, clinic = null, uiLang = 'en';
 
+  // Words on the page in each language. Facts (times, prices) always come from the server.
   const UI = {
-    en: { hi: 'Hello! How can we help you today?', body: 'Ask about timings, prices, doctors, insurance or booking a visit. You can write in English, हिंदी or తెలుగు.', ph: 'Type your question', sos: 'Emergency' },
-    hi: { hi: 'नमस्ते! आज हम आपकी क्या मदद करें?', body: 'समय, फ़ीस, डॉक्टर, बीमा या अपॉइंटमेंट के बारे में पूछिए। आप English, हिंदी या తెలుగు में लिख सकते हैं।', ph: 'अपना सवाल लिखें', sos: 'इमरजेंसी' },
-    te: { hi: 'నమస్తే! ఈ రోజు మేము మీకు ఎలా సహాయం చేయగలం?', body: 'సమయాలు, ధరలు, డాక్టర్లు, ఇన్సూరెన్స్ లేదా అపాయింట్‌మెంట్ గురించి అడగండి. మీరు English, हिंदी లేదా తెలుగులో రాయవచ్చు.', ph: 'మీ ప్రశ్న రాయండి', sos: 'ఎమర్జెన్సీ' },
+    en: { hi: 'Hello! How can we help you today?', body: 'Ask about timings, prices, doctors, insurance or booking a visit. You can write in English, हिंदी or తెలుగు.', ph: 'Type your question', sos: 'Emergency', call: 'Call', sub: 'Front desk, Banjara Hills', newchat: 'Start a new chat',
+      lede: "Ask the front desk anything about your visit. Replies come straight from the clinic's own details, and a real person steps in when needed.",
+      open: (c) => 'Open now, closes ' + c, closed: 'Closed now', opens: (d, t) => ', opens ' + d + ' at ' + t, lunch: (c) => 'Lunch break, front desk back soon. Closes ' + c, emerg: (c) => 'Emergencies only today, until ' + c,
+      today: 'today', tomorrow: 'tomorrow', team: 'Clinic team', typing: 'The front desk is typing', facts: ['Address', 'Landmark', 'Phone', 'Emergency', 'Today'] },
+    hi: { hi: 'नमस्ते! आज हम आपकी क्या मदद करें?', body: 'समय, फ़ीस, डॉक्टर, बीमा या अपॉइंटमेंट के बारे में पूछिए। आप हिंदी, English या తెలుగు में लिख सकते हैं।', ph: 'अपना सवाल लिखें', sos: 'इमरजेंसी', call: 'कॉल', sub: 'फ्रंट डेस्क, बंजारा हिल्स', newchat: 'नई बातचीत शुरू करें',
+      lede: 'अपनी विज़िट के बारे में फ्रंट डेस्क से कुछ भी पूछें। जवाब क्लिनिक की अपनी जानकारी से आते हैं, और ज़रूरत पड़ने पर हमारी टीम का कोई व्यक्ति मदद करता है।',
+      open: (c) => 'अभी खुला है, ' + c + ' बजे बंद होगा', closed: 'अभी बंद है', opens: (d, t) => ', ' + d + ' ' + t + ' बजे खुलेगा', lunch: (c) => 'लंच ब्रेक, फ्रंट डेस्क जल्द वापस आएगा', emerg: (c) => 'आज सिर्फ़ इमरजेंसी, ' + c + ' तक',
+      today: 'आज', tomorrow: 'कल', team: 'क्लिनिक टीम', typing: 'फ्रंट डेस्क लिख रहा है', facts: ['पता', 'लैंडमार्क', 'फ़ोन', 'इमरजेंसी', 'आज'] },
+    te: { hi: 'నమస్తే! ఈ రోజు మేము మీకు ఎలా సహాయం చేయగలం?', body: 'సమయాలు, ధరలు, డాక్టర్లు, ఇన్సూరెన్స్ లేదా అపాయింట్‌మెంట్ గురించి అడగండి. మీరు తెలుగు, English లేదా हिंदी లో రాయవచ్చు.', ph: 'మీ ప్రశ్న రాయండి', sos: 'ఎమర్జెన్సీ', call: 'కాల్', sub: 'ఫ్రంట్ డెస్క్, బంజారా హిల్స్', newchat: 'కొత్త చాట్ మొదలుపెట్టండి',
+      lede: 'మీ విజిట్ గురించి ఫ్రంట్ డెస్క్‌ని ఏదైనా అడగండి. జవాబులు క్లినిక్ వివరాల నుండే వస్తాయి, అవసరమైతే మా టీమ్ సభ్యులు సహాయం చేస్తారు.',
+      open: (c) => 'ఇప్పుడు తెరిచి ఉంది, ' + c + 'కి మూసివేస్తారు', closed: 'ఇప్పుడు మూసి ఉంది', opens: (d, t) => ', ' + d + ' ' + t + 'కి తెరుస్తారు', lunch: (c) => 'లంచ్ బ్రేక్, ఫ్రంట్ డెస్క్ త్వరలో వస్తుంది', emerg: (c) => 'ఈ రోజు ఎమర్జెన్సీలకు మాత్రమే, ' + c + ' వరకు',
+      today: 'ఈ రోజు', tomorrow: 'రేపు', team: 'క్లినిక్ టీమ్', typing: 'ఫ్రంట్ డెస్క్ టైప్ చేస్తోంది', facts: ['చిరునామా', 'ల్యాండ్‌మార్క్', 'ఫోన్', 'ఎమర్జెన్సీ', 'ఈ రోజు'] },
   };
+  const DAYS = {
+    hi: { Sunday: 'रविवार', Monday: 'सोमवार', Tuesday: 'मंगलवार', Wednesday: 'बुधवार', Thursday: 'गुरुवार', Friday: 'शुक्रवार', Saturday: 'शनिवार' },
+    te: { Sunday: 'ఆదివారం', Monday: 'సోమవారం', Tuesday: 'మంగళవారం', Wednesday: 'బుధవారం', Thursday: 'గురువారం', Friday: 'శుక్రవారం', Saturday: 'శనివారం' },
+  };
+
+  // Small pictures for the quick buttons, in the same order as the buttons.
+  const ICONS = [
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h11M7 9h11M7 4c7 0 7 9 0 9h-.5L15 21"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17M9 15l2 2 4-4"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/><path d="M15 15v3a2 2 0 0 0 4 0v-1"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12 2.3 2.3 4.2-4.6"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  ];
+  const SOS_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>';
+  const BOT_FACE = '<svg viewBox="0 0 40 40" aria-hidden="true"><path style="fill: var(--pine)" d="M12 5.5c-4.2 0-6.6 4.2-5.6 9.4.9 4.6 3.3 7.2 4.2 12.6.8 4.8 1.9 8 4.1 8 2.4 0 2.6-5 3.6-8.4.4-1.4 1-2.1 1.7-2.1s1.3.7 1.7 2.1c1 3.4 1.2 8.4 3.6 8.4 2.2 0 3.3-3.2 4.1-8 .9-5.4 3.3-8 4.2-12.6 1-5.2-1.4-9.4-5.6-9.4-3.2 0-4.6 2-8 2s-4.8-2-8-2Z"/><circle cx="16" cy="16" r="1.6" fill="#fff"/><circle cx="24" cy="16" r="1.6" fill="#fff"/><path d="M16.5 20.5c1.8 2 5.2 2 7 0" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg>';
 
   // ---------- session ----------
   const params = new URLSearchParams(location.search);
@@ -20,10 +46,15 @@
   try { session = localStorage.getItem('brd_session'); } catch (e) {}
   if (!session || askOnLoad) { session = newId(); try { localStorage.setItem('brd_session', session); } catch (e) {} }
   try { uiLang = localStorage.getItem('brd_lang') || 'en'; } catch (e) {}
+  if (!UI[uiLang]) uiLang = 'en';
 
   // ---------- rendering ----------
   function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   function scroll() { requestAnimationFrame(() => { log.scrollTop = log.scrollHeight; }); }
+  function face(staff, name) {
+    if (staff) { const f = el('div', 'staff-face', (name || 'CT').split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase()); f.setAttribute('aria-hidden', 'true'); return f; }
+    const f = el('div', 'bot-face'); f.innerHTML = BOT_FACE; return f;
+  }
 
   function addPatient(text) {
     const row = el('div', 'row me enter');
@@ -37,28 +68,26 @@
     if (m.role === 'patient') { addPatient(m.text); return; }
     const isStaff = m.role === 'staff';
     const row = el('div', 'row them' + (isStaff ? ' staff' : '') + (m.kind === 'urgent' ? ' urgent' : '') + (animate ? ' enter' : ''));
-    if (isStaff) row.appendChild(el('div', 'who', (m.by || 'Clinic team') + ', Bright Roots'));
+    if (isStaff) row.appendChild(el('div', 'who', (m.by || UI[uiLang].team) + ', Bright Roots'));
+    const line = el('div', 'line');
+    line.appendChild(face(isStaff, m.by));
     const bubble = el('div', 'bubble bot-msg' + (isStaff ? ' staff-msg' : ''), m.text);
     bubble.dataset.kind = m.kind || (isStaff ? 'staff' : 'answer');
     if (m.ticket) { bubble.dataset.ticket = m.ticket.id; bubble.dataset.status = m.ticket.status; }
-    row.appendChild(bubble);
+    line.appendChild(bubble);
+    row.appendChild(line);
     if (m.kind === 'urgent' && m.call) {
-      const a = el('a', 'btn urgent-call', 'Call ' + m.call + ' now');
+      const a = el('a', 'btn urgent-call');
+      a.innerHTML = SOS_ICON.replace('<svg', '<svg width="20" height="20"'); a.append(' Call ' + m.call + ' now');
       a.href = 'tel:' + m.call.replace(/\s+/g, '');
       row.appendChild(a);
     }
     if (m.card === 'booking_form') row.appendChild(bookingCard());
     if (m.card === 'contact_form' && m.ticket) row.appendChild(contactCard(m.ticket.id));
     const meta = el('div', 'meta');
-    if (!isStaff) {
-      const lab = el('span', 'source-label' + (m.source === 'ai' ? ' ai' : ''), m.source === 'ai' ? 'AI reply, checked against clinic file' : 'Answered from clinic file');
-      meta.appendChild(lab);
-    } else meta.appendChild(el('span', '', 'Reply from our team'));
-    if (m.ticket) {
-      const word = m.ticket.status === 'urgent' ? 'urgent' : m.ticket.status === 'needs human' ? 'needs human' : m.ticket.status;
-      const tag = el('span', 'ticket-tag' + (m.ticket.status === 'urgent' ? ' urgent' : ''), 'Ticket ' + m.ticket.id + ', ' + word);
-      meta.appendChild(tag);
-    }
+    if (!isStaff) meta.appendChild(el('span', 'source-label' + (m.source === 'ai' ? ' ai' : ''), m.source === 'ai' ? 'AI reply, checked against clinic file' : 'Answered from clinic file'));
+    else meta.appendChild(el('span', '', 'Reply from our team'));
+    if (m.ticket) meta.appendChild(el('span', 'ticket-tag' + (m.ticket.status === 'urgent' ? ' urgent' : ''), 'Ticket ' + m.ticket.id + (m.ticket.status ? ', ' + m.ticket.status : '')));
     if (m.map) {
       const a = el('a', 'map-link', 'Open in Maps');
       a.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(m.map);
@@ -73,7 +102,11 @@
 
   function typing(on) {
     let t = $('#typing');
-    if (on && !t) { t = el('div', 'typing'); t.id = 'typing'; t.setAttribute('aria-label', 'The front desk is typing'); t.innerHTML = '<i></i><i></i><i></i>'; log.appendChild(t); scroll(); }
+    if (on && !t) {
+      t = el('div', 'typing'); t.id = 'typing'; t.setAttribute('aria-label', UI[uiLang].typing);
+      t.appendChild(face(false)); const d = el('div', 'dots'); d.innerHTML = '<i></i><i></i><i></i>'; t.appendChild(d);
+      log.appendChild(t); scroll();
+    }
     if (!on && t) t.remove();
   }
 
@@ -82,12 +115,15 @@
     const items = list || base;
     chips.innerHTML = '';
     items.forEach((q) => {
-      const b = el('button', 'chip', q.label); b.type = 'button';
+      const b = el('button', 'chip'); b.type = 'button';
+      const i = base.findIndex((x) => x.send === q.send);
+      const icon = ICONS[i >= 0 ? i : 2];
+      b.innerHTML = icon; b.append(q.label);
       b.addEventListener('click', () => ask(q.send));
       chips.appendChild(b);
     });
     if (clinic) {
-      const sos = el('a', 'chip sos', UI[uiLang].sos + ': ' + clinic.emergency_phone);
+      const sos = el('a', 'chip sos'); sos.innerHTML = SOS_ICON; sos.append(UI[uiLang].sos + ': ' + clinic.emergency_phone);
       sos.href = 'tel:' + clinic.emergency_phone.replace(/\s+/g, '');
       chips.appendChild(sos);
     }
@@ -154,7 +190,7 @@
     addPatient(text);
     input.value = ''; grow();
     typing(true);
-    const r = await api('/api/chat', { session, text });
+    const r = await api('/api/chat', { session, text, lang: uiLang });
     typing(false);
     if (r.message) addMessage(r.message);
     else addMessage({ role: 'bot', kind: 'error', source: 'file', text: r.error || 'Sorry, something went wrong. Please call us on ' + ((clinic && clinic.phone) || 'the clinic number') + '.' });
@@ -173,7 +209,7 @@
 
   // ---------- today strip ----------
   function drawToday(t) {
-    const box = $('#today'), line = $('#dayline'), status = $('#today-status');
+    const U = UI[uiLang], box = $('#today'), line = $('#dayline'), status = $('#today-status');
     const START = 8 * 60, END = 21 * 60, pct = (m) => Math.max(0, Math.min(100, ((m - START) / (END - START)) * 100));
     line.querySelectorAll('.seg,.lunch,.now').forEach((n) => n.remove());
     t.ranges.forEach(([a, b]) => { const s = el('div', 'seg' + (t.emergencyOnly ? ' emergency' : '')); s.style.left = pct(a) + '%'; s.style.width = pct(b) - pct(a) + '%'; line.appendChild(s); });
@@ -181,31 +217,57 @@
     const n = el('div', 'now'); n.style.left = pct(t.nowMin) + '%'; line.appendChild(n);
     box.classList.remove('is-open', 'is-closed', 'is-lunch');
     let text;
-    if (t.open && t.emergencyOnly) { text = 'Emergencies only today, until ' + t.closesAt; box.classList.add('is-lunch'); }
-    else if (t.inLunch) { text = 'Lunch break, front desk back soon. Closes ' + t.closesAt; box.classList.add('is-lunch'); }
-    else if (t.open) { text = 'Open now, closes ' + t.closesAt; box.classList.add('is-open'); }
-    else { text = 'Closed now' + (t.next ? ', opens ' + t.next.day + ' at ' + t.next.time : ''); box.classList.add('is-closed'); }
+    const day = (d) => d === 'today' ? U.today : d === 'tomorrow' ? U.tomorrow : ((DAYS[uiLang] || {})[d] || d);
+    if (t.open && t.emergencyOnly) { text = U.emerg(t.closesAt); box.classList.add('is-lunch'); }
+    else if (t.inLunch) { text = U.lunch(t.closesAt); box.classList.add('is-lunch'); }
+    else if (t.open) { text = U.open(t.closesAt); box.classList.add('is-open'); }
+    else { text = U.closed + (t.next ? U.opens(day(t.next.day), t.next.time) : ''); box.classList.add('is-closed'); }
     status.textContent = text;
   }
 
   function sideFacts(c) {
     const dl = $('#side-facts'); dl.innerHTML = '';
-    [['Address', c.address], ['Landmark', c.landmark], ['Phone', c.phone], ['Emergency', c.emergency_phone], ['Today', c.today.value]].forEach(([k, v]) => {
-      if (!v) return; dl.appendChild(el('dt', '', k)); dl.appendChild(el('dd', '', v));
+    [c.address, c.landmark, c.phone, c.emergency_phone, c.today.value].forEach((v, i) => {
+      if (!v) return; dl.appendChild(el('dt', '', UI[uiLang].facts[i])); dl.appendChild(el('dd', '', v));
+    });
+  }
+
+  function team(c) {
+    [$('#team'), $('#side-team')].forEach((box) => {
+      box.innerHTML = '';
+      (c.doctors || []).forEach((d) => {
+        const card = el('div', 'doc');
+        const initials = d.name.replace(/^Dr\.?\s*/i, '').split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+        card.appendChild(el('div', 'avatar', initials));
+        const t = el('div'); t.appendChild(el('div', 'doc-name', d.name)); t.appendChild(el('div', 'doc-days', d.days)); card.appendChild(t);
+        box.appendChild(card);
+      });
     });
   }
 
   function setLang(l) {
     uiLang = UI[l] ? l : 'en';
     try { localStorage.setItem('brd_lang', uiLang); } catch (e) {}
+    document.documentElement.lang = uiLang;
     document.querySelectorAll('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === uiLang)));
-    $('#welcome-hi').textContent = UI[uiLang].hi;
-    $('#welcome-body').textContent = UI[uiLang].body;
+    document.querySelectorAll('[data-i18n]').forEach((n) => { n.textContent = UI[uiLang][n.dataset.i18n]; });
     input.placeholder = UI[uiLang].ph;
+    if (clinic) { drawToday(clinic.today); sideFacts(clinic); }
     renderChips();
   }
 
-  function grow() { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; }
+  function grow() {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight + 3, 120) + 'px';
+    input.classList.toggle('tall', input.scrollHeight > 120);
+  }
+
+  // If a photo can't load (no internet, blocked), show the drawing instead.
+  document.querySelectorAll('#photos img').forEach((img) => {
+    const fail = () => $('.clinic-side').classList.add('no-photos');
+    if (img.complete && img.naturalWidth === 0 && img.src) fail();
+    img.addEventListener('error', fail);
+  });
 
   // ---------- start ----------
   $('#composer').addEventListener('submit', (e) => { e.preventDefault(); ask(input.value); });
@@ -221,8 +283,8 @@
     if (c && c.name) {
       clinic = c;
       $('#clinic-name').textContent = c.name; $('#side-name').textContent = c.name;
-      const call = $('#call-btn'); call.href = 'tel:' + c.phone.replace(/\s+/g, '');
-      drawToday(c.today); sideFacts(c);
+      $('#call-btn').href = 'tel:' + c.phone.replace(/\s+/g, '');
+      team(c);
       setInterval(async () => { const n = await api('/api/clinic/public'); if (n && n.today) { clinic = n; drawToday(n.today); } }, 60000);
     }
     chips.classList.add('intro'); setTimeout(() => chips.classList.remove('intro'), 1600);
