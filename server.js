@@ -9,6 +9,8 @@ loadEnvFile();
 const engine = require('./lib/engine');
 const store = require('./lib/store');
 const ai = require('./lib/ai');
+const { T, tr } = require('./lib/text');
+const { localize } = require('./lib/localize');
 const { runChecks } = require('./lib/checks');
 const demo = require('./lib/demo');
 
@@ -56,7 +58,10 @@ function staffOk(req) {
   const got = String(req.headers['x-staff-pin'] || '');
   return got.length === STAFF_PIN.length && crypto.timingSafeEqual(Buffer.from(got), Buffer.from(STAFF_PIN));
 }
-const clean = (m) => ({ id: m.id, role: m.role, text: m.text, ts: m.ts, source: m.source, kind: m.kind, ticket: m.ticket, card: m.card, call: m.call, map: m.map, quick: m.quick, by: m.by });
+const clean = (m) => ({ id: m.id, role: m.role, text: m.text, ts: m.ts, source: m.source, kind: m.kind, ticket: m.ticket, card: m.card, call: m.call, map: m.map, quick: m.quick, by: m.by, lang: m.lang });
+const LANGS = ['en', 'hi', 'te'];
+const pickLang = (l) => (LANGS.includes(l) ? l : 'en');
+const loc = (text, lang) => (lang === 'en' ? text : localize(text, lang));
 
 // ---------- tickets with age and priority ----------
 function ticketView(t, data, now) {
@@ -99,7 +104,7 @@ async function handleChat(sessionId, text, prefLang) {
   const ex = engine.extractContact(text);
   if (ex.phone) s.contact = { ...s.contact, ...ex };
   const m = store.addMessage(sessionId, {
-    role: 'bot', text: r.text, source: r.source, kind: r.kind, card: r.card || null, call: r.call || null, map: r.map || null, quick: r.quick || [],
+    role: 'bot', lang: r.lang, text: r.text, source: r.source, kind: r.kind, card: r.card || null, call: r.call || null, map: r.map || null, quick: r.quick || [],
     ticket: r.ticket ? { id: r.ticket.id, status: r.ticket.status } : null,
   });
   store.save();
@@ -120,7 +125,15 @@ const server = http.createServer(async (req, res) => {
     // ---- patient API ----
     if (req.method === 'GET' && p === '/api/clinic/public') {
       const d = store.clinic(), c = d.clinic || {};
-      return send(res, 200, { name: c.name, phone: c.phone, whatsapp: c.whatsapp, emergency_phone: c.emergency_phone, address: c.address, landmark: c.landmark, today: engine.todayStatus(d), quick: engine.QUICK, services: (d.services || []).map((x) => x.name), doctors: (d.doctors || []).map((x) => ({ name: x.name, role: x.role, days: x.days })), ai: ai.info().configured, version: d.updated_at || null });
+      const today = engine.todayStatus(d);
+      const local = {};
+      for (const l of ['hi', 'te']) {
+        local[l] = {
+          name: loc(c.name, l), address: loc(c.address, l), landmark: loc(tr(l, c.landmark).text, l), phone: loc(c.phone, l), emergency_phone: loc(c.emergency_phone, l),
+          today: loc(tr(l, today.value).text, l), services: (d.services || []).map((x) => loc(tr(l, x.name).text, l)), doctors: (d.doctors || []).map((x) => ({ name: loc(x.name, l), days: loc(tr(l, x.days).text, l) })),
+        };
+      }
+      return send(res, 200, { local, name: c.name, phone: c.phone, whatsapp: c.whatsapp, emergency_phone: c.emergency_phone, address: c.address, landmark: c.landmark, today: engine.todayStatus(d), quick: engine.QUICK, services: (d.services || []).map((x) => x.name), doctors: (d.doctors || []).map((x) => ({ name: x.name, role: x.role, days: x.days })), ai: ai.info().configured, version: d.updated_at || null });
     }
     if (req.method === 'POST' && p === '/api/chat') {
       if (limited(ip)) return send(res, 429, { error: 'Too many messages. Please wait a minute.' });
@@ -140,47 +153,47 @@ const server = http.createServer(async (req, res) => {
       if (!validSession(b.session)) return send(res, 400, { error: 'Bad session' });
       const d = store.clinic();
       const tm = String(b.time || '').match(/^(\d{1,2}):(\d{2})$/);
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(b.date || '') || !tm) return send(res, 400, { error: 'Pick a day and a time.' });
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(b.date || '') || !tm) return send(res, 400, { error: { en: 'Pick a day and a time.', hi: 'कृपया दिन और समय चुनें।', te: 'దయచేసి రోజు, సమయం ఎంచుకోండి.' }[pickLang(b.lang)] });
       const min = +tm[1] * 60 + +tm[2];
       const slot = engine.checkSlot(d, b.date, min);
       if (!slot.ok) {
         const dh = engine.dayHours(d, new Date(b.date + 'T00:00:00Z').getUTCDay());
-        return send(res, 400, { error: slot.why === 'past' ? 'That time has already passed. Pick a later time.' : `We are not open for bookings then. That day: ${dh ? dh.value : 'Closed'}.` });
+        const lang = pickLang(b.lang), dow = new Date(b.date + 'T00:00:00Z').getUTCDay();
+        const { DAY_NAMES } = require('./lib/text');
+        return send(res, 400, { error: loc(slot.why === 'past' ? T[lang].bookPast : T[lang].bookOutside(DAY_NAMES[lang][dow], tr(lang, dh ? dh.value : 'Closed').text), lang) });
       }
       const s = store.session(b.session);
       const contact = { name: String(b.name || '').slice(0, 60), phone: String(b.phone || '').slice(0, 20) };
       s.contact = { ...s.contact, ...contact }; s.pending = null;
       const service = String(b.service || '').slice(0, 80);
       const label = engine.fmtWhen(b.date, min, 'en');
-      store.addMessage(b.session, { role: 'patient', text: `Booking request: ${label}${service ? `, ${service}` : ''}` });
+      store.addMessage(b.session, { role: 'patient', text: `${pickLang(b.lang) === 'en' ? 'Booking request' : pickLang(b.lang) === 'hi' ? 'अपॉइंटमेंट रिक्वेस्ट' : 'అపాయింట్‌మెంట్ రిక్వెస్ట్'}: ${engine.fmtWhen(b.date, min, pickLang(b.lang))}${service ? `, ${loc(tr(pickLang(b.lang), service).text, pickLang(b.lang))}` : ''}` });
       const t = store.createTicket(b.session, { type: 'booking', status: 'needs human', question: `Booking form: ${label}${service ? `, ${service}` : ''}${b.note ? `. Note: ${String(b.note).slice(0, 200)}` : ''}`, booking: { date: b.date, min, label }, contact, services: service ? [service] : [] });
       const cb = engine.callbackPromise(d);
-      const text = [`Done! I've sent a booking request for ${label} (ticket ${t.id}). Our team will confirm it on phone or WhatsApp within ${cb}.`, slot.inLunch ? `Please note the lunch break: ${slot.lunchText}.` : null].filter(Boolean).join('\n\n');
-      const m = store.addMessage(b.session, { role: 'bot', text, source: 'file', kind: 'booking', ticket: { id: t.id, status: t.status }, quick: [] });
+      const lang = pickLang(b.lang), L = T[lang];
+      const text = loc([L.bookDone(engine.fmtWhen(b.date, min, lang), t.id, cb), slot.inLunch ? L.lunchNote(tr(lang, slot.lunchText).text) : null].filter(Boolean).join('\n\n'), lang);
+      const m = store.addMessage(b.session, { role: 'bot', lang, text, source: 'file', kind: 'booking', ticket: { id: t.id, status: t.status }, quick: [] });
       return send(res, 200, { messages: store.session(b.session).messages.slice(-2).map(clean), last: clean(m) });
     }
     if (req.method === 'POST' && p === '/api/contact') {
       const b = await body(req);
       if (!validSession(b.session)) return send(res, 400, { error: 'Bad session' });
       const phone = String(b.phone || '').trim();
-      if (!/^[+\d][\d\s-]{6,18}$/.test(phone)) return send(res, 400, { error: 'Please enter a valid phone number.' });
+      if (!/^[+\d][\d\s-]{6,18}$/.test(phone)) return send(res, 400, { error: { en: 'Please enter a valid phone number.', hi: 'कृपया सही फ़ोन नंबर लिखें।', te: 'దయచేసి సరైన ఫోన్ నంబర్ రాయండి.' }[pickLang(b.lang)] });
       const s = store.session(b.session);
       const contact = { name: String(b.name || '').slice(0, 60), phone };
       s.contact = { ...s.contact, ...contact }; s.pending = null;
       const t = store.ticket(b.ticketId);
       if (t && t.session === b.session) store.updateTicket(t.id, { contact: { ...t.contact, ...contact } });
-      const m = store.addMessage(b.session, { role: 'bot', text: 'Thank you. We have your details and will call you back.', source: 'file', kind: 'answer', quick: [] });
+      const lang = pickLang(b.lang);
+      const m = store.addMessage(b.session, { role: 'bot', lang, text: T[lang].contactSaved, source: 'file', kind: 'answer', quick: [] });
       return send(res, 200, { last: clean(m) });
     }
 
-    // Demo tickets can be added from the patient page too (they are marked Demo and easy to remove).
-    if (req.method === 'POST' && p === '/api/demo/load') { if (limited(ip)) return send(res, 429, { error: 'Please wait a minute.' }); return send(res, 200, { ok: true, tickets: await demo.load() }); }
-
     // ---- staff API ----
-    if (p === '/api/demo/clear' || p.startsWith('/api/staff/') || p.startsWith('/api/tickets') || p === '/api/clinic' || p.startsWith('/api/clinic/') || p === '/api/selftest' || p === '/api/health') {
+    if (p.startsWith('/api/staff/') || p.startsWith('/api/tickets') || p === '/api/clinic' || p.startsWith('/api/clinic/') || p === '/api/selftest' || p === '/api/health') {
       if (!staffOk(req)) return send(res, 401, { error: 'Staff PIN needed', pin: true });
     }
-    if (req.method === 'POST' && p === '/api/demo/clear') return send(res, 200, { ok: true, removed: demo.clear() });
     if (req.method === 'GET' && p === '/api/health') return send(res, 200, { ok: true, ai: ai.info(), pin: !!STAFF_PIN, tickets: store.db.tickets.length });
     if (req.method === 'GET' && p === '/api/tickets') return send(res, 200, { tickets: ticketList(), ai: ai.info().configured, now: Date.now() });
     let m;
@@ -238,6 +251,8 @@ const server = http.createServer(async (req, res) => {
 });
 
 if (require.main === module) {
+  // Example tickets so the staff page is never empty. Set DEMO_DATA=off to start with none.
+  if (process.env.DEMO_DATA !== 'off' && store.db.tickets.length === 0) demo.load().then((ids) => console.log(`Added ${ids.length} example tickets`));
   server.listen(PORT, () => {
     const a = ai.info();
     console.log(`Front desk running on http://localhost:${PORT}  (staff page: /staff)`);

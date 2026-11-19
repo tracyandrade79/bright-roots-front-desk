@@ -156,7 +156,6 @@
     if (!typing && current !== ids.join(',')) ids.forEach((id) => q.appendChild(nodes.get(id)));
     else ids.forEach((id) => { if (!nodes.get(id).isConnected) q.prepend(nodes.get(id)); });
     $('#empty').hidden = r.tickets.length > 0;
-    $('#demo-clear').hidden = !r.tickets.some((t) => t.demo);
     const open = r.tickets.filter((t) => t.status === 'urgent' || t.status === 'needs human');
     $('#n-urgent').textContent = r.tickets.filter((t) => t.status === 'urgent').length;
     $('#n-waiting').textContent = r.tickets.filter((t) => t.status === 'needs human' && t.type !== 'booking').length;
@@ -279,15 +278,6 @@
   }
   $('#run-file').addEventListener('click', () => runChecks(false));
   $('#run-ai').addEventListener('click', () => runChecks(true));
-
-  $('#demo-load').addEventListener('click', async () => {
-    const r = await api('/api/demo/load', 'POST', {});
-    if (r.ok) { toast(r.tickets.length + ' demo tickets added'); firstLoad = true; refresh(); } else toast(r.error || 'Could not add demo tickets');
-  });
-  $('#demo-clear').addEventListener('click', async () => {
-    const r = await api('/api/demo/clear', 'POST', {});
-    if (r.ok) { toast('Demo tickets removed'); refresh(); }
-  });
 
   refresh(); health();
   setInterval(refresh, 3000);

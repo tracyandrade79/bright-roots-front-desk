@@ -243,46 +243,52 @@
   "q": "शनिवार को क्लिनिक कितने बजे खुलता है?",
   "expect": "answer",
   "must_include": [
-   "9:00 am",
-   "8:00 pm"
-  ]
+   "९:००",
+   "८:००"
+  ],
+  "no_latin": true
  },
  {
   "q": "रूट कैनाल कितने का है?",
   "expect": "answer",
   "must_include": [
-   "6,500",
-   "9,000"
-  ]
+   "६,५००",
+   "९,०००"
+  ],
+  "no_latin": true
  },
  {
   "q": "మీ క్లినిక్ శనివారం ఎన్ని గంటలకు తెరుస్తారు?",
   "expect": "answer",
   "must_include": [
-   "9:00 am"
-  ]
+   "౯:౦౦"
+  ],
+  "no_latin": true
  },
  {
   "q": "పిల్లలను ఏ డాక్టర్ చూస్తారు?",
   "expect": "answer",
   "must_include": [
-   "Sneha Rao"
-  ]
+   "స్నేహా"
+  ],
+  "no_latin": true
  },
  {
   "q": "మా అమ్మకు ముఖం వాపు వచ్చింది, శ్వాస కష్టంగా ఉంది",
   "expect": "urgent",
   "must_include": [
-   "98000 00123"
+   "౯౮౦౦౦ ౦౦౧౨౩"
   ],
-  "status": "urgent"
+  "status": "urgent",
+  "no_latin": true
  },
  {
   "q": "मेरे दाँत में बहुत दर्द है, कौन सी दवा लूँ?",
   "expect": "no_advice",
   "must_include": [
-   "dentist"
-  ]
+   "डेंटिस्ट"
+  ],
+  "no_latin": true
  },
  {
   "q": "Bleeding after my tooth extraction is not stopping, what do I do?",
@@ -306,5 +312,27 @@
   "must_include": [
    "dentist"
   ]
+ },
+ {
+  "q": "क्या आप स्टार हेल्थ बीमा लेते हैं?",
+  "expect": "answer",
+  "must_include": [
+   "कैशलेस"
+  ],
+  "no_latin": true
+ },
+ {
+  "q": "క్లినిక్ ఎక్కడ ఉంది?",
+  "expect": "answer",
+  "must_include": [
+   "బంజారా హిల్స్"
+  ],
+  "no_latin": true
+ },
+ {
+  "q": "क्या आप इनविज़लाइन करते हैं?",
+  "expect": "ticket",
+  "status": "needs human",
+  "no_latin": true
  }
 ]

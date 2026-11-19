@@ -8,23 +8,50 @@
 
   // Words on the page in each language. Facts (times, prices) always come from the server.
   const UI = {
-    en: { hi: 'Hello! How can we help you today?', body: 'Ask about timings, prices, doctors, insurance or booking a visit. You can write in English, हिंदी or తెలుగు.', ph: 'Type your question', sos: 'Emergency', call: 'Call', sub: 'Front desk, Banjara Hills', newchat: 'Start a new chat', staff: 'Staff page', staffbtn: 'Staff page', demochat: 'Play demo chat', demotickets: 'Add demo tickets', stopdemo: 'Stop demo',
+    en: { hi: 'Hello! How can we help you today?', body: 'Ask about timings, prices, doctors, insurance or booking a visit. You can write in English, हिंदी or తెలుగు.', ph: 'Type your question', sos: 'Emergency', call: 'Call', sub: 'Front desk, Banjara Hills', newchat: 'Start a new chat', staff: 'Staff page', staffbtn: 'Staff page',
       lede: "Ask the front desk anything about your visit. Replies come straight from the clinic's own details, and a real person steps in when needed.",
       open: (c) => 'Open now, closes ' + c, closed: 'Closed now', opens: (d, t) => ', opens ' + d + ' at ' + t, lunch: (c) => 'Lunch break, front desk back soon. Closes ' + c, emerg: (c) => 'Emergencies only today, until ' + c,
+      file: 'Answered from clinic file', ai: 'AI reply, checked against clinic file', fromteam: 'Reply from our team', ticket: 'Ticket', maps: 'Open in Maps',
+      callnow: (n) => 'Call ' + n + ' now', st: { 'needs human': 'needs human', urgent: 'urgent', answered: 'answered', closed: 'closed' },
+      f: { name: 'Your name', phone: 'Phone', day: 'Day', time: 'Time', treat: 'Treatment (optional)', notsure: 'Not sure yet', book: 'Send booking request', num: 'Send my number', bad: 'Please enter a valid phone number.', ph: '98xxx xxxxx' },
+      scale: ['8 am', '12 pm', '4 pm', '9 pm'], photos: 'Photos:', photographer: 'Ozkan Guner', on: 'on', unsplash: 'Unsplash', err: 'Sorry, something went wrong. Please call us on ',
       today: 'today', tomorrow: 'tomorrow', team: 'Clinic team', typing: 'The front desk is typing', facts: ['Address', 'Landmark', 'Phone', 'Emergency', 'Today'] },
-    hi: { hi: 'नमस्ते! आज हम आपकी क्या मदद करें?', body: 'समय, फ़ीस, डॉक्टर, बीमा या अपॉइंटमेंट के बारे में पूछिए। आप हिंदी, English या తెలుగు में लिख सकते हैं।', ph: 'अपना सवाल लिखें', sos: 'इमरजेंसी', call: 'कॉल', sub: 'फ्रंट डेस्क, बंजारा हिल्स', newchat: 'नई बातचीत शुरू करें', staff: 'स्टाफ़ पेज', staffbtn: 'स्टाफ़', demochat: 'डेमो चैट चलाएँ', demotickets: 'डेमो टिकट जोड़ें', stopdemo: 'डेमो रोकें',
+    hi: { hi: 'नमस्ते! आज हम आपकी क्या मदद करें?', body: 'समय, फ़ीस, डॉक्टर, बीमा या अपॉइंटमेंट के बारे में पूछिए। आप हिंदी, अंग्रेज़ी या तेलुगु में लिख सकते हैं।', ph: 'अपना सवाल लिखें', sos: 'इमरजेंसी', call: 'कॉल', sub: 'फ्रंट डेस्क, बंजारा हिल्स', newchat: 'नई बातचीत शुरू करें', staff: 'स्टाफ़ पेज', staffbtn: 'स्टाफ़',
       lede: 'अपनी विज़िट के बारे में फ्रंट डेस्क से कुछ भी पूछें। जवाब क्लिनिक की अपनी जानकारी से आते हैं, और ज़रूरत पड़ने पर हमारी टीम का कोई व्यक्ति मदद करता है।',
       open: (c) => 'अभी खुला है, ' + c + ' बजे बंद होगा', closed: 'अभी बंद है', opens: (d, t) => ', ' + d + ' ' + t + ' बजे खुलेगा', lunch: (c) => 'लंच ब्रेक, फ्रंट डेस्क जल्द वापस आएगा', emerg: (c) => 'आज सिर्फ़ इमरजेंसी, ' + c + ' तक',
+      file: 'क्लिनिक की जानकारी से जवाब', ai: 'एआई का जवाब, क्लिनिक की जानकारी से जाँचा गया', fromteam: 'हमारी टीम का जवाब', ticket: 'टिकट', maps: 'नक्शे में खोलें',
+      callnow: (n) => 'अभी ' + n + ' पर कॉल करें', st: { 'needs human': 'स्टाफ़ जवाब देगा', urgent: 'अति आवश्यक', answered: 'जवाब दिया गया', closed: 'बंद' },
+      f: { name: 'आपका नाम', phone: 'फ़ोन नंबर', day: 'दिन', time: 'समय', treat: 'इलाज (ज़रूरी नहीं)', notsure: 'अभी पक्का नहीं', book: 'अपॉइंटमेंट रिक्वेस्ट भेजें', num: 'मेरा नंबर भेजें', bad: 'कृपया सही फ़ोन नंबर लिखें।', ph: 'मोबाइल नंबर' },
+      scale: ['सुबह ८', 'दोपहर १२', 'शाम ४', 'रात ९'], photos: 'फ़ोटो:', photographer: 'ओज़कान गुनर', on: ',', unsplash: 'अनस्प्लैश', err: 'माफ़ कीजिए, कुछ गड़बड़ हो गई। कृपया हमें कॉल करें: ',
       today: 'आज', tomorrow: 'कल', team: 'क्लिनिक टीम', typing: 'फ्रंट डेस्क लिख रहा है', facts: ['पता', 'लैंडमार्क', 'फ़ोन', 'इमरजेंसी', 'आज'] },
-    te: { hi: 'నమస్తే! ఈ రోజు మేము మీకు ఎలా సహాయం చేయగలం?', body: 'సమయాలు, ధరలు, డాక్టర్లు, ఇన్సూరెన్స్ లేదా అపాయింట్‌మెంట్ గురించి అడగండి. మీరు తెలుగు, English లేదా हिंदी లో రాయవచ్చు.', ph: 'మీ ప్రశ్న రాయండి', sos: 'ఎమర్జెన్సీ', call: 'కాల్', sub: 'ఫ్రంట్ డెస్క్, బంజారా హిల్స్', newchat: 'కొత్త చాట్ మొదలుపెట్టండి', staff: 'స్టాఫ్ పేజీ', staffbtn: 'స్టాఫ్', demochat: 'డెమో చాట్ ప్లే చేయండి', demotickets: 'డెమో టికెట్లు జోడించండి', stopdemo: 'డెమో ఆపండి',
+    te: { hi: 'నమస్తే! ఈ రోజు మేము మీకు ఎలా సహాయం చేయగలం?', body: 'సమయాలు, ధరలు, డాక్టర్లు, ఇన్సూరెన్స్ లేదా అపాయింట్‌మెంట్ గురించి అడగండి. మీరు తెలుగు, ఇంగ్లీష్ లేదా హిందీలో రాయవచ్చు.', ph: 'మీ ప్రశ్న రాయండి', sos: 'ఎమర్జెన్సీ', call: 'కాల్', sub: 'ఫ్రంట్ డెస్క్, బంజారా హిల్స్', newchat: 'కొత్త చాట్ మొదలుపెట్టండి', staff: 'స్టాఫ్ పేజీ', staffbtn: 'స్టాఫ్',
       lede: 'మీ విజిట్ గురించి ఫ్రంట్ డెస్క్‌ని ఏదైనా అడగండి. జవాబులు క్లినిక్ వివరాల నుండే వస్తాయి, అవసరమైతే మా టీమ్ సభ్యులు సహాయం చేస్తారు.',
       open: (c) => 'ఇప్పుడు తెరిచి ఉంది, ' + c + 'కి మూసివేస్తారు', closed: 'ఇప్పుడు మూసి ఉంది', opens: (d, t) => ', ' + d + ' ' + t + 'కి తెరుస్తారు', lunch: (c) => 'లంచ్ బ్రేక్, ఫ్రంట్ డెస్క్ త్వరలో వస్తుంది', emerg: (c) => 'ఈ రోజు ఎమర్జెన్సీలకు మాత్రమే, ' + c + ' వరకు',
+      file: 'క్లినిక్ సమాచారం నుండి జవాబు', ai: 'ఏఐ జవాబు, క్లినిక్ సమాచారంతో సరిచూశాం', fromteam: 'మా టీమ్ జవాబు', ticket: 'టికెట్', maps: 'మ్యాప్‌లో తెరవండి',
+      callnow: (n) => 'ఇప్పుడే ' + n + 'కు కాల్ చేయండి', st: { 'needs human': 'స్టాఫ్ జవాబిస్తారు', urgent: 'అత్యవసరం', answered: 'జవాబు ఇచ్చారు', closed: 'మూసివేశారు' },
+      f: { name: 'మీ పేరు', phone: 'ఫోన్ నంబర్', day: 'రోజు', time: 'సమయం', treat: 'చికిత్స (అవసరం లేదు)', notsure: 'ఇంకా తెలియదు', book: 'అపాయింట్‌మెంట్ రిక్వెస్ట్ పంపండి', num: 'నా నంబర్ పంపండి', bad: 'దయచేసి సరైన ఫోన్ నంబర్ రాయండి.', ph: 'మొబైల్ నంబర్' },
+      scale: ['ఉదయం ౮', 'మధ్యాహ్నం ౧౨', 'సాయంత్రం ౪', 'రాత్రి ౯'], photos: 'ఫోటోలు:', photographer: 'ఓజ్కాన్ గునర్', on: ',', unsplash: 'అన్‌స్ప్లాష్', err: 'క్షమించండి, ఏదో సమస్య వచ్చింది. దయచేసి మాకు కాల్ చేయండి: ',
       today: 'ఈ రోజు', tomorrow: 'రేపు', team: 'క్లినిక్ టీమ్', typing: 'ఫ్రంట్ డెస్క్ టైప్ చేస్తోంది', facts: ['చిరునామా', 'ల్యాండ్‌మార్క్', 'ఫోన్', 'ఎమర్జెన్సీ', 'ఈ రోజు'] },
   };
   const DAYS = {
     hi: { Sunday: 'रविवार', Monday: 'सोमवार', Tuesday: 'मंगलवार', Wednesday: 'बुधवार', Thursday: 'गुरुवार', Friday: 'शुक्रवार', Saturday: 'शनिवार' },
     te: { Sunday: 'ఆదివారం', Monday: 'సోమవారం', Tuesday: 'మంగళవారం', Wednesday: 'బుధవారం', Thursday: 'గురువారం', Friday: 'శుక్రవారం', Saturday: 'శనివారం' },
   };
+
+  // Hindi/Telugu digits and times (9:00 am -> सुबह ९:००)
+  const DIG = { hi: '०१२३४५६७८९', te: '౦౧౨౩౪౫౬౭౮౯' };
+  const PART = { hi: ['सुबह', 'दोपहर', 'शाम', 'रात'], te: ['ఉదయం', 'మధ్యాహ్నం', 'సాయంత్రం', 'రాత్రి'] };
+  function dg(s, l) { const d = DIG[l]; return d ? String(s).replace(/[0-9]/g, (c) => d[+c]) : String(s); }
+  function lt(s, l) {
+    if (!DIG[l]) return String(s);
+    return dg(String(s).replace(/(\d{1,2}):(\d{2})\s*([ap])m/gi, (m, h, mm, ap) => {
+      let H = +h % 12; if (ap.toLowerCase() === 'p') H += 12;
+      const p = H >= 4 && H < 12 ? 0 : H >= 12 && H < 16 ? 1 : H >= 16 && H < 20 ? 2 : 3;
+      return PART[l][p] + ' ' + h + ':' + mm;
+    }), l);
+  }
+  const L = (k) => UI[uiLang][k];
+  const local = (k) => (uiLang !== 'en' && clinic && clinic.local && clinic.local[uiLang] ? clinic.local[uiLang][k] : clinic && clinic[k]);
 
   // Small pictures for the quick buttons, in the same order as the buttons.
   const ICONS = [
@@ -67,8 +94,9 @@
     if (m.id) { seen.add(m.id); lastId = Math.max(lastId, m.id); }
     if (m.role === 'patient') { addPatient(m.text); return; }
     const isStaff = m.role === 'staff';
+    const ml = UI[m.lang] ? m.lang : uiLang, U = UI[isStaff ? uiLang : ml];
     const row = el('div', 'row them' + (isStaff ? ' staff' : '') + (m.kind === 'urgent' ? ' urgent' : '') + (animate ? ' enter' : ''));
-    if (isStaff) row.appendChild(el('div', 'who', (m.by || UI[uiLang].team) + ', Bright Roots'));
+    if (isStaff) row.appendChild(el('div', 'who', (m.by && m.by !== 'Clinic team' ? m.by : U.team) + ', ' + (local('name') || 'Bright Roots Dental')));
     const line = el('div', 'line');
     line.appendChild(face(isStaff, m.by));
     const bubble = el('div', 'bubble bot-msg' + (isStaff ? ' staff-msg' : ''), m.text);
@@ -78,18 +106,21 @@
     row.appendChild(line);
     if (m.kind === 'urgent' && m.call) {
       const a = el('a', 'btn urgent-call');
-      a.innerHTML = SOS_ICON.replace('<svg', '<svg width="20" height="20"'); a.append(' Call ' + m.call + ' now');
+      a.innerHTML = SOS_ICON.replace('<svg', '<svg width="20" height="20"'); a.append(' ' + U.callnow(dg(m.call, ml)));
       a.href = 'tel:' + m.call.replace(/\s+/g, '');
       row.appendChild(a);
     }
     if (m.card === 'booking_form') row.appendChild(bookingCard());
     if (m.card === 'contact_form' && m.ticket) row.appendChild(contactCard(m.ticket.id));
     const meta = el('div', 'meta');
-    if (!isStaff) meta.appendChild(el('span', 'source-label' + (m.source === 'ai' ? ' ai' : ''), m.source === 'ai' ? 'AI reply, checked against clinic file' : 'Answered from clinic file'));
-    else meta.appendChild(el('span', '', 'Reply from our team'));
-    if (m.ticket) meta.appendChild(el('span', 'ticket-tag' + (m.ticket.status === 'urgent' ? ' urgent' : ''), 'Ticket ' + m.ticket.id + (m.ticket.status ? ', ' + m.ticket.status : '')));
+    if (!isStaff) meta.appendChild(el('span', 'source-label' + (m.source === 'ai' ? ' ai' : ''), m.source === 'ai' ? U.ai : U.file));
+    else meta.appendChild(el('span', '', U.fromteam));
+    if (m.ticket) {
+      const num = ml === 'en' ? m.ticket.id : dg(m.ticket.id.replace(/^T-/, ''), ml);
+      meta.appendChild(el('span', 'ticket-tag' + (m.ticket.status === 'urgent' ? ' urgent' : ''), U.ticket + ' ' + num + (m.ticket.status ? ', ' + (U.st[m.ticket.status] || m.ticket.status) : '')));
+    }
     if (m.map) {
-      const a = el('a', 'map-link', 'Open in Maps');
+      const a = el('a', 'map-link', U.maps);
       a.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(m.map);
       a.target = '_blank'; a.rel = 'noopener';
       meta.appendChild(a);
@@ -124,7 +155,7 @@
       chips.appendChild(b);
     });
     if (clinic) {
-      const sos = el('a', 'chip sos'); sos.innerHTML = SOS_ICON; sos.append(UI[uiLang].sos + ': ' + clinic.emergency_phone);
+      const sos = el('a', 'chip sos'); sos.innerHTML = SOS_ICON; sos.append(UI[uiLang].sos + ': ' + dg(clinic.emergency_phone, uiLang));
       sos.href = 'tel:' + clinic.emergency_phone.replace(/\s+/g, '');
       chips.appendChild(sos);
     }
@@ -138,21 +169,25 @@
 
   function bookingCard() {
     const f = el('form', 'card');
-    f.innerHTML = '<label>Your name<input name="name" required maxlength="60" autocomplete="name"></label>' +
-      '<label>Phone<input name="phone" required inputmode="tel" maxlength="16" autocomplete="tel" placeholder="98xxx xxxxx"></label>' +
-      '<div class="two"><label>Day<input name="date" type="date" required></label><label>Time<select name="time" required></select></label></div>' +
-      '<label>Treatment (optional)<select name="service"><option value="">Not sure yet</option></select></label>' +
-      '<div class="err" role="alert"></div><button class="btn" type="submit">Send booking request</button>';
+    const F = L('f');
+    f.innerHTML = '<label><span></span><input name="name" required maxlength="60" autocomplete="name"></label>' +
+      '<label><span></span><input name="phone" required inputmode="tel" maxlength="16" autocomplete="tel"></label>' +
+      '<div class="two"><label><span></span><input name="date" type="date" required></label><label><span></span><select name="time" required></select></label></div>' +
+      '<label><span></span><select name="service"><option value=""></option></select></label>' +
+      '<div class="err" role="alert"></div><button class="btn" type="submit"></button>';
+    const sp = f.querySelectorAll('label > span'); [F.name, F.phone, F.day, F.time, F.treat].forEach((t, i) => { sp[i].textContent = t; });
+    f.elements.phone.placeholder = F.ph; f.elements.service.options[0].textContent = F.notsure; $('button', f).textContent = F.book;
     const date = f.elements.date, time = f.elements.time;
     date.min = istToday(); date.value = istToday();
-    opts(9 * 60, 20 * 60, 30).forEach((m) => { const o = el('option', '', label(m)); o.value = hhmm(m); time.appendChild(o); });
+    opts(9 * 60, 20 * 60, 30).forEach((m) => { const o = el('option', '', lt(label(m), uiLang)); o.value = hhmm(m); time.appendChild(o); });
     time.value = '11:00';
-    ((clinic && clinic.services) || []).forEach((s) => { const o = el('option', '', s); o.value = s; f.elements.service.appendChild(o); });
+    const ls = local('services') || [];
+    ((clinic && clinic.services) || []).forEach((s, i) => { const o = el('option', '', ls[i] || s); o.value = s; f.elements.service.appendChild(o); });
     f.addEventListener('submit', async (e) => {
       e.preventDefault();
       const err = $('.err', f); err.textContent = '';
-      const body = { session, name: f.elements.name.value.trim(), phone: f.elements.phone.value.trim(), date: date.value, time: time.value, service: f.elements.service.value };
-      if (!/^[+\d][\d\s-]{6,15}$/.test(body.phone)) { err.textContent = 'Please enter a valid phone number.'; return; }
+      const body = { session, lang: uiLang, name: f.elements.name.value.trim(), phone: f.elements.phone.value.trim(), date: date.value, time: time.value, service: f.elements.service.value };
+      if (!/^[+\d][\d\s-]{6,15}$/.test(body.phone)) { err.textContent = F.bad; return; }
       const r = await api('/api/book', body);
       if (r.error) { err.textContent = r.error; return; }
       f.classList.add('done');
@@ -163,12 +198,15 @@
 
   function contactCard(ticketId) {
     const f = el('form', 'card');
-    f.innerHTML = '<label>Your name<input name="name" maxlength="60" autocomplete="name"></label>' +
-      '<label>Phone<input name="phone" required inputmode="tel" maxlength="16" autocomplete="tel" placeholder="98xxx xxxxx"></label>' +
-      '<div class="err" role="alert"></div><button class="btn" type="submit">Send my number</button>';
+    const F = L('f');
+    f.innerHTML = '<label><span></span><input name="name" maxlength="60" autocomplete="name"></label>' +
+      '<label><span></span><input name="phone" required inputmode="tel" maxlength="16" autocomplete="tel"></label>' +
+      '<div class="err" role="alert"></div><button class="btn" type="submit"></button>';
+    const sp = f.querySelectorAll('label > span'); sp[0].textContent = F.name; sp[1].textContent = F.phone;
+    f.elements.phone.placeholder = F.ph; $('button', f).textContent = F.num;
     f.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const r = await api('/api/contact', { session, ticketId, name: f.elements.name.value.trim(), phone: f.elements.phone.value.trim() });
+      const r = await api('/api/contact', { session, ticketId, lang: uiLang, name: f.elements.name.value.trim(), phone: f.elements.phone.value.trim() });
       if (r.error) { $('.err', f).textContent = r.error; return; }
       f.classList.add('done');
       addMessage(r.last);
@@ -194,7 +232,7 @@
     const r = await api('/api/chat', { session, text, lang: uiLang });
     typing(false);
     if (r.message) addMessage(r.message);
-    else addMessage({ role: 'bot', kind: 'error', source: 'file', text: r.error || 'Sorry, something went wrong. Please call us on ' + ((clinic && clinic.phone) || 'the clinic number') + '.' });
+    else addMessage({ role: 'bot', lang: uiLang, kind: 'error', source: 'file', text: r.error || (L('err') + dg((clinic && clinic.phone) || '', uiLang)) });
     busy = false; sendBtn.disabled = false; document.body.dataset.state = 'idle';
     input.focus({ preventScroll: true });
   }
@@ -219,16 +257,19 @@
     box.classList.remove('is-open', 'is-closed', 'is-lunch');
     let text;
     const day = (d) => d === 'today' ? U.today : d === 'tomorrow' ? U.tomorrow : ((DAYS[uiLang] || {})[d] || d);
-    if (t.open && t.emergencyOnly) { text = U.emerg(t.closesAt); box.classList.add('is-lunch'); }
-    else if (t.inLunch) { text = U.lunch(t.closesAt); box.classList.add('is-lunch'); }
-    else if (t.open) { text = U.open(t.closesAt); box.classList.add('is-open'); }
-    else { text = U.closed + (t.next ? U.opens(day(t.next.day), t.next.time) : ''); box.classList.add('is-closed'); }
+    const ct = lt(t.closesAt || '', uiLang);
+    if (t.open && t.emergencyOnly) { text = U.emerg(ct); box.classList.add('is-lunch'); }
+    else if (t.inLunch) { text = U.lunch(ct); box.classList.add('is-lunch'); }
+    else if (t.open) { text = U.open(ct); box.classList.add('is-open'); }
+    else { text = U.closed + (t.next ? U.opens(day(t.next.day), lt(t.next.time, uiLang)) : ''); box.classList.add('is-closed'); }
     status.textContent = text;
+    document.querySelectorAll('.dayline-scale span').forEach((sp, i) => { sp.textContent = U.scale[i]; });
   }
 
   function sideFacts(c) {
     const dl = $('#side-facts'); dl.innerHTML = '';
-    [c.address, c.landmark, c.phone, c.emergency_phone, c.today.value].forEach((v, i) => {
+    const lc = uiLang !== 'en' && c.local ? c.local[uiLang] : null;
+    (lc ? [lc.address, lc.landmark, lc.phone, lc.emergency_phone, lc.today] : [c.address, c.landmark, c.phone, c.emergency_phone, c.today.value]).forEach((v, i) => {
       if (!v) return; dl.appendChild(el('dt', '', UI[uiLang].facts[i])); dl.appendChild(el('dd', '', v));
     });
   }
@@ -236,11 +277,14 @@
   function team(c) {
     [$('#team'), $('#side-team')].forEach((box) => {
       box.innerHTML = '';
-      (c.doctors || []).forEach((d) => {
+      const lc = uiLang !== 'en' && c.local ? c.local[uiLang] : null;
+      (c.doctors || []).forEach((d, di) => {
         const card = el('div', 'doc');
-        const initials = d.name.replace(/^Dr\.?\s*/i, '').split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+        const nm = (lc ? lc.doctors[di].name : d.name).replace(/^(Dr\.?|डॉ\.|డా\.)\s*/i, '');
+        const initials = nm.split(/\s+/).map((w) => Array.from(w)[0] || '').join('').slice(0, 2).toUpperCase();
         card.appendChild(el('div', 'avatar', initials));
-        const t = el('div'); t.appendChild(el('div', 'doc-name', d.name)); t.appendChild(el('div', 'doc-days', d.days)); card.appendChild(t);
+        const ld = lc ? lc.doctors[di] : d;
+        const t = el('div'); t.appendChild(el('div', 'doc-name', ld.name)); t.appendChild(el('div', 'doc-days', ld.days)); card.appendChild(t);
         box.appendChild(card);
       });
     });
@@ -253,7 +297,7 @@
     document.querySelectorAll('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === uiLang)));
     document.querySelectorAll('[data-i18n]').forEach((n) => { n.textContent = UI[uiLang][n.dataset.i18n]; });
     input.placeholder = UI[uiLang].ph;
-    if (clinic) { drawToday(clinic.today); sideFacts(clinic); }
+    if (clinic) { drawToday(clinic.today); sideFacts(clinic); team(clinic); $('#clinic-name').textContent = local('name'); $('#side-name').textContent = local('name'); }
     renderChips();
   }
 
@@ -277,40 +321,6 @@
   input.addEventListener('input', grow);
   document.querySelectorAll('.lang button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
   $('#new-chat').addEventListener('click', () => { try { localStorage.removeItem('brd_session'); } catch (e) {} location.href = location.pathname; });
-
-  // ---------- demo ----------
-  const DEMO_Q = {
-    en: ['What time do you open on Saturday?', 'How much is a root canal?', 'Which doctor sees children?', 'Book a teeth cleaning for Saturday at 11 am', 'Do you do Invisalign?', 'My face is swelling and I cannot breathe properly'],
-    hi: ['शनिवार को क्लिनिक कितने बजे खुलता है?', 'रूट कैनाल कितने का है?', 'बच्चों को कौन सा डॉक्टर देखता है?', 'शनिवार सुबह 11 बजे सफाई के लिए अपॉइंटमेंट बुक करें', 'क्या आप इनविज़लाइन करते हैं?'],
-    te: ['శనివారం క్లినిక్ ఎన్ని గంటలకు తెరుస్తారు?', 'రూట్ కెనాల్ ధర ఎంత?', 'పిల్లలను ఏ డాక్టర్ చూస్తారు?', 'శనివారం ఉదయం 11 గంటలకు క్లీనింగ్ అపాయింట్‌మెంట్ బుక్ చేయండి', 'మీరు ఇన్విసలైన్ చేస్తారా?'],
-  };
-  let demoRunning = false;
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-  async function playDemo() {
-    const btn = $('#demo-chat');
-    if (demoRunning) { demoRunning = false; return; }
-    demoRunning = true; btn.textContent = UI[uiLang].stopdemo;
-    // a fresh chat marked as demo, so its tickets are labelled Demo on the staff page
-    session = 'demo_chat_' + newId().slice(2, 18); seen.clear(); lastId = 0;
-    try { localStorage.setItem('brd_session', session); } catch (e) {}
-    log.querySelectorAll('.row, .typing').forEach((n) => n.remove());
-    for (const q of DEMO_Q[uiLang] || DEMO_Q.en) {
-      if (!demoRunning) break;
-      input.value = ''; input.focus({ preventScroll: true });
-      for (const ch of q) { if (!demoRunning) break; input.value += ch; grow(); await sleep(28); }
-      if (!demoRunning) break;
-      await sleep(350); await ask(input.value); await sleep(2600);
-    }
-    demoRunning = false; btn.textContent = UI[uiLang].demochat; input.value = ''; grow();
-  }
-  $('#demo-chat').addEventListener('click', playDemo);
-  $('#demo-tickets').addEventListener('click', async () => {
-    const b = $('#demo-tickets'); b.disabled = true;
-    const r = await api('/api/demo/load', {});
-    b.disabled = false;
-    if (r.ok) window.open('/staff', '_blank', 'noopener');
-    else alert(r.error || 'Could not add demo tickets.');
-  });
 
   (async function start() {
     document.body.dataset.state = 'loading';

@@ -130,5 +130,3 @@ dialog input { border: 1.5px solid var(--line); border-radius: 10px; padding: 10
   .t-age { margin-left: 0; width: 100%; }
   .sound { margin-left: 0; }
 }
-#demo-load { background: var(--turmeric); color: var(--ink); box-shadow: none; }
-#demo-load:hover { background: color-mix(in srgb, var(--turmeric) 85%, #fff); }
