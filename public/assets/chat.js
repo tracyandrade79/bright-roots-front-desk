@@ -8,15 +8,15 @@
 
   // Words on the page in each language. Facts (times, prices) always come from the server.
   const UI = {
-    en: { hi: 'Hello! How can we help you today?', body: 'Ask about timings, prices, doctors, insurance or booking a visit. You can write in English, हिंदी or తెలుగు.', ph: 'Type your question', sos: 'Emergency', call: 'Call', sub: 'Front desk, Banjara Hills', newchat: 'Start a new chat', staff: 'Staff page', staffbtn: 'Staff page',
+    en: { hi: 'Hello! How can we help you today?', body: 'Ask about timings, prices, doctors, insurance or booking a visit. You can write in English, हिंदी or తెలుగు.', ph: 'Type your question', sos: 'Emergency', call: 'Call', sub: 'Front desk, Banjara Hills', newchat: 'Start a new chat', staff: 'Staff page', staffbtn: 'Staff page', demochat: 'Play demo chat', demotickets: 'Add demo tickets', stopdemo: 'Stop demo',
       lede: "Ask the front desk anything about your visit. Replies come straight from the clinic's own details, and a real person steps in when needed.",
       open: (c) => 'Open now, closes ' + c, closed: 'Closed now', opens: (d, t) => ', opens ' + d + ' at ' + t, lunch: (c) => 'Lunch break, front desk back soon. Closes ' + c, emerg: (c) => 'Emergencies only today, until ' + c,
       today: 'today', tomorrow: 'tomorrow', team: 'Clinic team', typing: 'The front desk is typing', facts: ['Address', 'Landmark', 'Phone', 'Emergency', 'Today'] },
-    hi: { hi: 'नमस्ते! आज हम आपकी क्या मदद करें?', body: 'समय, फ़ीस, डॉक्टर, बीमा या अपॉइंटमेंट के बारे में पूछिए। आप हिंदी, English या తెలుగు में लिख सकते हैं।', ph: 'अपना सवाल लिखें', sos: 'इमरजेंसी', call: 'कॉल', sub: 'फ्रंट डेस्क, बंजारा हिल्स', newchat: 'नई बातचीत शुरू करें', staff: 'स्टाफ़ पेज', staffbtn: 'स्टाफ़',
+    hi: { hi: 'नमस्ते! आज हम आपकी क्या मदद करें?', body: 'समय, फ़ीस, डॉक्टर, बीमा या अपॉइंटमेंट के बारे में पूछिए। आप हिंदी, English या తెలుగు में लिख सकते हैं।', ph: 'अपना सवाल लिखें', sos: 'इमरजेंसी', call: 'कॉल', sub: 'फ्रंट डेस्क, बंजारा हिल्स', newchat: 'नई बातचीत शुरू करें', staff: 'स्टाफ़ पेज', staffbtn: 'स्टाफ़', demochat: 'डेमो चैट चलाएँ', demotickets: 'डेमो टिकट जोड़ें', stopdemo: 'डेमो रोकें',
       lede: 'अपनी विज़िट के बारे में फ्रंट डेस्क से कुछ भी पूछें। जवाब क्लिनिक की अपनी जानकारी से आते हैं, और ज़रूरत पड़ने पर हमारी टीम का कोई व्यक्ति मदद करता है।',
       open: (c) => 'अभी खुला है, ' + c + ' बजे बंद होगा', closed: 'अभी बंद है', opens: (d, t) => ', ' + d + ' ' + t + ' बजे खुलेगा', lunch: (c) => 'लंच ब्रेक, फ्रंट डेस्क जल्द वापस आएगा', emerg: (c) => 'आज सिर्फ़ इमरजेंसी, ' + c + ' तक',
       today: 'आज', tomorrow: 'कल', team: 'क्लिनिक टीम', typing: 'फ्रंट डेस्क लिख रहा है', facts: ['पता', 'लैंडमार्क', 'फ़ोन', 'इमरजेंसी', 'आज'] },
-    te: { hi: 'నమస్తే! ఈ రోజు మేము మీకు ఎలా సహాయం చేయగలం?', body: 'సమయాలు, ధరలు, డాక్టర్లు, ఇన్సూరెన్స్ లేదా అపాయింట్‌మెంట్ గురించి అడగండి. మీరు తెలుగు, English లేదా हिंदी లో రాయవచ్చు.', ph: 'మీ ప్రశ్న రాయండి', sos: 'ఎమర్జెన్సీ', call: 'కాల్', sub: 'ఫ్రంట్ డెస్క్, బంజారా హిల్స్', newchat: 'కొత్త చాట్ మొదలుపెట్టండి', staff: 'స్టాఫ్ పేజీ', staffbtn: 'స్టాఫ్',
+    te: { hi: 'నమస్తే! ఈ రోజు మేము మీకు ఎలా సహాయం చేయగలం?', body: 'సమయాలు, ధరలు, డాక్టర్లు, ఇన్సూరెన్స్ లేదా అపాయింట్‌మెంట్ గురించి అడగండి. మీరు తెలుగు, English లేదా हिंदी లో రాయవచ్చు.', ph: 'మీ ప్రశ్న రాయండి', sos: 'ఎమర్జెన్సీ', call: 'కాల్', sub: 'ఫ్రంట్ డెస్క్, బంజారా హిల్స్', newchat: 'కొత్త చాట్ మొదలుపెట్టండి', staff: 'స్టాఫ్ పేజీ', staffbtn: 'స్టాఫ్', demochat: 'డెమో చాట్ ప్లే చేయండి', demotickets: 'డెమో టికెట్లు జోడించండి', stopdemo: 'డెమో ఆపండి',
       lede: 'మీ విజిట్ గురించి ఫ్రంట్ డెస్క్‌ని ఏదైనా అడగండి. జవాబులు క్లినిక్ వివరాల నుండే వస్తాయి, అవసరమైతే మా టీమ్ సభ్యులు సహాయం చేస్తారు.',
       open: (c) => 'ఇప్పుడు తెరిచి ఉంది, ' + c + 'కి మూసివేస్తారు', closed: 'ఇప్పుడు మూసి ఉంది', opens: (d, t) => ', ' + d + ' ' + t + 'కి తెరుస్తారు', lunch: (c) => 'లంచ్ బ్రేక్, ఫ్రంట్ డెస్క్ త్వరలో వస్తుంది', emerg: (c) => 'ఈ రోజు ఎమర్జెన్సీలకు మాత్రమే, ' + c + ' వరకు',
       today: 'ఈ రోజు', tomorrow: 'రేపు', team: 'క్లినిక్ టీమ్', typing: 'ఫ్రంట్ డెస్క్ టైప్ చేస్తోంది', facts: ['చిరునామా', 'ల్యాండ్‌మార్క్', 'ఫోన్', 'ఎమర్జెన్సీ', 'ఈ రోజు'] },
@@ -116,7 +116,8 @@
     chips.innerHTML = '';
     items.forEach((q) => {
       const b = el('button', 'chip'); b.type = 'button';
-      const i = base.findIndex((x) => x.send === q.send);
+      let i = base.findIndex((x) => x.send === q.send);
+      if (i < 0 && clinic && clinic.quick) for (const l of Object.keys(clinic.quick)) { const j = clinic.quick[l].findIndex((x) => x.send === q.send); if (j >= 0) { i = j; break; } }
       const icon = ICONS[i >= 0 ? i : 2];
       b.innerHTML = icon; b.append(q.label);
       b.addEventListener('click', () => ask(q.send));
@@ -276,6 +277,40 @@
   input.addEventListener('input', grow);
   document.querySelectorAll('.lang button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
   $('#new-chat').addEventListener('click', () => { try { localStorage.removeItem('brd_session'); } catch (e) {} location.href = location.pathname; });
+
+  // ---------- demo ----------
+  const DEMO_Q = {
+    en: ['What time do you open on Saturday?', 'How much is a root canal?', 'Which doctor sees children?', 'Book a teeth cleaning for Saturday at 11 am', 'Do you do Invisalign?', 'My face is swelling and I cannot breathe properly'],
+    hi: ['शनिवार को क्लिनिक कितने बजे खुलता है?', 'रूट कैनाल कितने का है?', 'बच्चों को कौन सा डॉक्टर देखता है?', 'शनिवार सुबह 11 बजे सफाई के लिए अपॉइंटमेंट बुक करें', 'क्या आप इनविज़लाइन करते हैं?'],
+    te: ['శనివారం క్లినిక్ ఎన్ని గంటలకు తెరుస్తారు?', 'రూట్ కెనాల్ ధర ఎంత?', 'పిల్లలను ఏ డాక్టర్ చూస్తారు?', 'శనివారం ఉదయం 11 గంటలకు క్లీనింగ్ అపాయింట్‌మెంట్ బుక్ చేయండి', 'మీరు ఇన్విసలైన్ చేస్తారా?'],
+  };
+  let demoRunning = false;
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  async function playDemo() {
+    const btn = $('#demo-chat');
+    if (demoRunning) { demoRunning = false; return; }
+    demoRunning = true; btn.textContent = UI[uiLang].stopdemo;
+    // a fresh chat marked as demo, so its tickets are labelled Demo on the staff page
+    session = 'demo_chat_' + newId().slice(2, 18); seen.clear(); lastId = 0;
+    try { localStorage.setItem('brd_session', session); } catch (e) {}
+    log.querySelectorAll('.row, .typing').forEach((n) => n.remove());
+    for (const q of DEMO_Q[uiLang] || DEMO_Q.en) {
+      if (!demoRunning) break;
+      input.value = ''; input.focus({ preventScroll: true });
+      for (const ch of q) { if (!demoRunning) break; input.value += ch; grow(); await sleep(28); }
+      if (!demoRunning) break;
+      await sleep(350); await ask(input.value); await sleep(2600);
+    }
+    demoRunning = false; btn.textContent = UI[uiLang].demochat; input.value = ''; grow();
+  }
+  $('#demo-chat').addEventListener('click', playDemo);
+  $('#demo-tickets').addEventListener('click', async () => {
+    const b = $('#demo-tickets'); b.disabled = true;
+    const r = await api('/api/demo/load', {});
+    b.disabled = false;
+    if (r.ok) window.open('/staff', '_blank', 'noopener');
+    else alert(r.error || 'Could not add demo tickets.');
+  });
 
   (async function start() {
     document.body.dataset.state = 'loading';

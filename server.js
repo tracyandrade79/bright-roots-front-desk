@@ -83,6 +83,7 @@ function ticketList() {
 
 // ---------- chat ----------
 async function handleChat(sessionId, text, prefLang) {
+  const isDemo = sessionId.startsWith('demo_');
   const s = store.session(sessionId);
   const data = store.clinic();
   const history = s.messages.slice(-8).map((m) => ({ role: m.role, text: m.text }));
@@ -90,7 +91,7 @@ async function handleChat(sessionId, text, prefLang) {
   const r = await engine.reply(text, {
     data, session: s, history, prefLang,
     ai: ai.config() ? ai.ask : null,
-    createTicket: (f) => store.createTicket(sessionId, f),
+    createTicket: (f) => store.createTicket(sessionId, { ...f, demo: isDemo }),
     saveContact: (id, c) => { s.contact = { ...s.contact, ...c }; store.updateTicket(id, { contact: { ...(store.ticket(id) || {}).contact, ...c } }); },
     onAIReject: (why) => { console.log(`[ai] reply rejected: ${why}`); },
     onAIError: (e) => { if (!/No AI key/.test(e.message)) console.log(`[ai] ${e.message}`); },
@@ -172,11 +173,13 @@ const server = http.createServer(async (req, res) => {
       return send(res, 200, { last: clean(m) });
     }
 
+    // Demo tickets can be added from the patient page too (they are marked Demo and easy to remove).
+    if (req.method === 'POST' && p === '/api/demo/load') { if (limited(ip)) return send(res, 429, { error: 'Please wait a minute.' }); return send(res, 200, { ok: true, tickets: await demo.load() }); }
+
     // ---- staff API ----
-    if (p.startsWith('/api/demo') || p.startsWith('/api/staff/') || p.startsWith('/api/tickets') || p === '/api/clinic' || p.startsWith('/api/clinic/') || p === '/api/selftest' || p === '/api/health') {
+    if (p === '/api/demo/clear' || p.startsWith('/api/staff/') || p.startsWith('/api/tickets') || p === '/api/clinic' || p.startsWith('/api/clinic/') || p === '/api/selftest' || p === '/api/health') {
       if (!staffOk(req)) return send(res, 401, { error: 'Staff PIN needed', pin: true });
     }
-    if (req.method === 'POST' && p === '/api/demo/load') return send(res, 200, { ok: true, tickets: await demo.load() });
     if (req.method === 'POST' && p === '/api/demo/clear') return send(res, 200, { ok: true, removed: demo.clear() });
     if (req.method === 'GET' && p === '/api/health') return send(res, 200, { ok: true, ai: ai.info(), pin: !!STAFF_PIN, tickets: store.db.tickets.length });
     if (req.method === 'GET' && p === '/api/tickets') return send(res, 200, { tickets: ticketList(), ai: ai.info().configured, now: Date.now() });

@@ -27,8 +27,8 @@ html, body { height: 100%; }
 
 /* Today's timings: the clinic day drawn as a strip */
 .today { padding: 2px 16px 10px; border-bottom: 1px solid var(--line); }
-.today-row { display: flex; align-items: center; gap: 8px; font-size: .9rem; font-weight: 700; }
-.today-status { flex: 1; min-width: 0; }
+.today-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-size: .9rem; font-weight: 700; }
+.today-status { flex: 1 1 180px; min-width: 0; }
 .today-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink-soft); flex: none; }
 .today.is-open .today-dot { background: var(--pine); box-shadow: 0 0 0 4px color-mix(in srgb, var(--pine) 18%, transparent); }
 .today.is-lunch .today-dot { background: var(--turmeric); box-shadow: 0 0 0 4px color-mix(in srgb, var(--turmeric) 22%, transparent); }
@@ -45,7 +45,7 @@ html, body { height: 100%; }
 
 /* Language switch: always visible at the top */
 .lang { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--paper); box-shadow: inset 0 0 0 1px var(--line); flex: none; }
-.lang button { border: 0; background: transparent; padding: 4px 10px; border-radius: 999px; font-size: .85rem; font-weight: 700; color: var(--ink-soft); line-height: 1.3; }
+.lang button { border: 0; background: transparent; padding: 4px 9px; min-width: 34px; border-radius: 999px; font-size: .85rem; font-weight: 700; color: var(--ink-soft); line-height: 1.3; }
 .lang button[aria-pressed="true"] { background: var(--pine); color: #fff; }
 
 /* ---------- messages ---------- */
@@ -126,7 +126,8 @@ html, body { height: 100%; }
 .send { width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--pine); color: #fff; display: grid; place-items: center; flex: none; }
 .send:hover { background: var(--pine-deep); }
 .send[disabled] { opacity: .45; }
-.foot { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 0 0 max(8px, env(safe-area-inset-bottom)); }
+.foot { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 10px; padding: 0 8px max(8px, env(safe-area-inset-bottom)); }
+.demo-link { color: var(--pine); font-weight: 700; }
 .dot-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--line); }
 .linkish { border: 0; background: none; color: var(--ink-soft); font-size: .8rem; text-decoration: underline; padding: 4px; }
 
