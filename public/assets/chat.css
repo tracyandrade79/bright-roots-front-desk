@@ -69,6 +69,7 @@ html, body { height: 100%; }
 .doc-name { font-weight: 700; font-size: .86rem; line-height: 1.15; }
 .doc-days { font-size: .76rem; color: var(--ink-soft); }
 
+.lang-note { align-self: center; margin: 6px 0; padding: 4px 12px; border-radius: 999px; background: var(--paper); box-shadow: inset 0 0 0 1px var(--line); color: var(--ink-soft); font-size: .8rem; }
 .row { display: flex; flex-direction: column; max-width: 88%; }
 .row.me { align-self: flex-end; align-items: flex-end; }
 .row.them { align-self: flex-start; }

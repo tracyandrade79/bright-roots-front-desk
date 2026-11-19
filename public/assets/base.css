@@ -15,8 +15,8 @@
   --line: #d4e8f4;
   --accent-ink: color-mix(in srgb, var(--turmeric) 45%, #000); /* dark text on accent tint */
   --radius-bubble: 18px;
-  --display: "Bricolage Grotesque", "Atkinson Hyperlegible", system-ui, sans-serif;
-  --body: "Atkinson Hyperlegible", "Noto Sans Devanagari", "Noto Sans Telugu", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Bricolage Grotesque", "Noto Sans Devanagari", "Noto Sans Telugu", "Atkinson Hyperlegible", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Noto Sans Devanagari", "Noto Sans Telugu", "Nirmala UI", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }

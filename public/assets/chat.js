@@ -11,7 +11,7 @@
     en: { hi: 'Hello! How can we help you today?', body: 'Ask about timings, prices, doctors, insurance or booking a visit. You can write in English, हिंदी or తెలుగు.', ph: 'Type your question', sos: 'Emergency', call: 'Call', sub: 'Front desk, Banjara Hills', newchat: 'Start a new chat', staff: 'Staff page', staffbtn: 'Staff page',
       lede: "Ask the front desk anything about your visit. Replies come straight from the clinic's own details, and a real person steps in when needed.",
       open: (c) => 'Open now, closes ' + c, closed: 'Closed now', opens: (d, t) => ', opens ' + d + ' at ' + t, lunch: (c) => 'Lunch break, front desk back soon. Closes ' + c, emerg: (c) => 'Emergencies only today, until ' + c,
-      file: 'Answered from clinic file', ai: 'AI reply, checked against clinic file', fromteam: 'Reply from our team', ticket: 'Ticket', maps: 'Open in Maps',
+      switched: 'Replies will now be in English.', file: 'Answered from clinic file', ai: 'AI reply, checked against clinic file', fromteam: 'Reply from our team', ticket: 'Ticket', maps: 'Open in Maps',
       callnow: (n) => 'Call ' + n + ' now', st: { 'needs human': 'needs human', urgent: 'urgent', answered: 'answered', closed: 'closed' },
       f: { name: 'Your name', phone: 'Phone', day: 'Day', time: 'Time', treat: 'Treatment (optional)', notsure: 'Not sure yet', book: 'Send booking request', num: 'Send my number', bad: 'Please enter a valid phone number.', ph: '98xxx xxxxx' },
       scale: ['8 am', '12 pm', '4 pm', '9 pm'], photos: 'Photos:', photographer: 'Ozkan Guner', on: 'on', unsplash: 'Unsplash', err: 'Sorry, something went wrong. Please call us on ',
@@ -19,7 +19,7 @@
     hi: { hi: 'नमस्ते! आज हम आपकी क्या मदद करें?', body: 'समय, फ़ीस, डॉक्टर, बीमा या अपॉइंटमेंट के बारे में पूछिए। आप हिंदी, अंग्रेज़ी या तेलुगु में लिख सकते हैं।', ph: 'अपना सवाल लिखें', sos: 'इमरजेंसी', call: 'कॉल', sub: 'फ्रंट डेस्क, बंजारा हिल्स', newchat: 'नई बातचीत शुरू करें', staff: 'स्टाफ़ पेज', staffbtn: 'स्टाफ़',
       lede: 'अपनी विज़िट के बारे में फ्रंट डेस्क से कुछ भी पूछें। जवाब क्लिनिक की अपनी जानकारी से आते हैं, और ज़रूरत पड़ने पर हमारी टीम का कोई व्यक्ति मदद करता है।',
       open: (c) => 'अभी खुला है, ' + c + ' बजे बंद होगा', closed: 'अभी बंद है', opens: (d, t) => ', ' + d + ' ' + t + ' बजे खुलेगा', lunch: (c) => 'लंच ब्रेक, फ्रंट डेस्क जल्द वापस आएगा', emerg: (c) => 'आज सिर्फ़ इमरजेंसी, ' + c + ' तक',
-      file: 'क्लिनिक की जानकारी से जवाब', ai: 'एआई का जवाब, क्लिनिक की जानकारी से जाँचा गया', fromteam: 'हमारी टीम का जवाब', ticket: 'टिकट', maps: 'नक्शे में खोलें',
+      switched: 'अब जवाब हिंदी में आएँगे।', file: 'क्लिनिक की जानकारी से जवाब', ai: 'एआई का जवाब, क्लिनिक की जानकारी से जाँचा गया', fromteam: 'हमारी टीम का जवाब', ticket: 'टिकट', maps: 'नक्शे में खोलें',
       callnow: (n) => 'अभी ' + n + ' पर कॉल करें', st: { 'needs human': 'स्टाफ़ जवाब देगा', urgent: 'अति आवश्यक', answered: 'जवाब दिया गया', closed: 'बंद' },
       f: { name: 'आपका नाम', phone: 'फ़ोन नंबर', day: 'दिन', time: 'समय', treat: 'इलाज (ज़रूरी नहीं)', notsure: 'अभी पक्का नहीं', book: 'अपॉइंटमेंट रिक्वेस्ट भेजें', num: 'मेरा नंबर भेजें', bad: 'कृपया सही फ़ोन नंबर लिखें।', ph: 'मोबाइल नंबर' },
       scale: ['सुबह ८', 'दोपहर १२', 'शाम ४', 'रात ९'], photos: 'फ़ोटो:', photographer: 'ओज़कान गुनर', on: ',', unsplash: 'अनस्प्लैश', err: 'माफ़ कीजिए, कुछ गड़बड़ हो गई। कृपया हमें कॉल करें: ',
@@ -27,7 +27,7 @@
     te: { hi: 'నమస్తే! ఈ రోజు మేము మీకు ఎలా సహాయం చేయగలం?', body: 'సమయాలు, ధరలు, డాక్టర్లు, ఇన్సూరెన్స్ లేదా అపాయింట్‌మెంట్ గురించి అడగండి. మీరు తెలుగు, ఇంగ్లీష్ లేదా హిందీలో రాయవచ్చు.', ph: 'మీ ప్రశ్న రాయండి', sos: 'ఎమర్జెన్సీ', call: 'కాల్', sub: 'ఫ్రంట్ డెస్క్, బంజారా హిల్స్', newchat: 'కొత్త చాట్ మొదలుపెట్టండి', staff: 'స్టాఫ్ పేజీ', staffbtn: 'స్టాఫ్',
       lede: 'మీ విజిట్ గురించి ఫ్రంట్ డెస్క్‌ని ఏదైనా అడగండి. జవాబులు క్లినిక్ వివరాల నుండే వస్తాయి, అవసరమైతే మా టీమ్ సభ్యులు సహాయం చేస్తారు.',
       open: (c) => 'ఇప్పుడు తెరిచి ఉంది, ' + c + 'కి మూసివేస్తారు', closed: 'ఇప్పుడు మూసి ఉంది', opens: (d, t) => ', ' + d + ' ' + t + 'కి తెరుస్తారు', lunch: (c) => 'లంచ్ బ్రేక్, ఫ్రంట్ డెస్క్ త్వరలో వస్తుంది', emerg: (c) => 'ఈ రోజు ఎమర్జెన్సీలకు మాత్రమే, ' + c + ' వరకు',
-      file: 'క్లినిక్ సమాచారం నుండి జవాబు', ai: 'ఏఐ జవాబు, క్లినిక్ సమాచారంతో సరిచూశాం', fromteam: 'మా టీమ్ జవాబు', ticket: 'టికెట్', maps: 'మ్యాప్‌లో తెరవండి',
+      switched: 'ఇప్పటి నుండి జవాబులు తెలుగులో వస్తాయి.', file: 'క్లినిక్ సమాచారం నుండి జవాబు', ai: 'ఏఐ జవాబు, క్లినిక్ సమాచారంతో సరిచూశాం', fromteam: 'మా టీమ్ జవాబు', ticket: 'టికెట్', maps: 'మ్యాప్‌లో తెరవండి',
       callnow: (n) => 'ఇప్పుడే ' + n + 'కు కాల్ చేయండి', st: { 'needs human': 'స్టాఫ్ జవాబిస్తారు', urgent: 'అత్యవసరం', answered: 'జవాబు ఇచ్చారు', closed: 'మూసివేశారు' },
       f: { name: 'మీ పేరు', phone: 'ఫోన్ నంబర్', day: 'రోజు', time: 'సమయం', treat: 'చికిత్స (అవసరం లేదు)', notsure: 'ఇంకా తెలియదు', book: 'అపాయింట్‌మెంట్ రిక్వెస్ట్ పంపండి', num: 'నా నంబర్ పంపండి', bad: 'దయచేసి సరైన ఫోన్ నంబర్ రాయండి.', ph: 'మొబైల్ నంబర్' },
       scale: ['ఉదయం ౮', 'మధ్యాహ్నం ౧౨', 'సాయంత్రం ౪', 'రాత్రి ౯'], photos: 'ఫోటోలు:', photographer: 'ఓజ్కాన్ గునర్', on: ',', unsplash: 'అన్‌స్ప్లాష్', err: 'క్షమించండి, ఏదో సమస్య వచ్చింది. దయచేసి మాకు కాల్ చేయండి: ',
@@ -127,7 +127,7 @@
     }
     row.appendChild(meta);
     log.appendChild(row);
-    if (!isStaff && m.quick) renderChips(m.quick.length ? m.quick : null);
+    if (!isStaff && m.quick) renderChips(m.quick.length && (m.lang || uiLang) === uiLang ? m.quick : null);
     scroll();
   }
 
@@ -290,8 +290,10 @@
     });
   }
 
-  function setLang(l) {
+  function setLang(l, fromUser) {
+    const changed = fromUser && UI[l] && l !== uiLang;
     uiLang = UI[l] ? l : 'en';
+    if (changed && log.querySelector('.row')) { const n = el('div', 'lang-note', UI[uiLang].switched); log.appendChild(n); scroll(); }
     try { localStorage.setItem('brd_lang', uiLang); } catch (e) {}
     document.documentElement.lang = uiLang;
     document.querySelectorAll('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === uiLang)));
@@ -319,7 +321,7 @@
   sendBtn.addEventListener('click', (e) => { e.preventDefault(); ask(input.value); });
   input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); ask(input.value); } });
   input.addEventListener('input', grow);
-  document.querySelectorAll('.lang button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  document.querySelectorAll('.lang button').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang, true)));
   $('#new-chat').addEventListener('click', () => { try { localStorage.removeItem('brd_session'); } catch (e) {} location.href = location.pathname; });
 
   (async function start() {
