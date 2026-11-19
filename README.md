@@ -20,7 +20,7 @@ The chat works fully with no key. A key only makes replies warmer.
 
 1. Copy `.env.example` to a file named `.env`.
 2. Fill in **one** option:
-   - Google Gemini free tier: `GEMINI_API_KEY=...` (get a key at aistudio.google.com). Check the current free model name in Google AI Studio and put it in `GEMINI_MODEL`.
+   - Google Gemini free tier: `GEMINI_API_KEY=...` (get a key at aistudio.google.com). The default model is `gemini-3-flash-preview`, which has a free tier. To use another, set `GEMINI_MODEL`.
    - DeepSeek or Z.ai: `AI_API_KEY`, `AI_BASE_URL`, `AI_MODEL`.
 3. Restart with `npm start`.
 

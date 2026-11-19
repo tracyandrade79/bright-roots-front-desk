@@ -60,7 +60,7 @@
     const li = el('li', 'ticket');
     li.dataset.ticket = t.id;
     li.innerHTML =
-      '<div class="t-head"><span class="pill p"></span><span class="pill st"></span><span class="pill type"></span><span class="pill late" hidden>Past callback time</span><span class="t-id"></span><span class="t-age"></span></div>' +
+      '<div class="t-head"><span class="pill p"></span><span class="pill st"></span><span class="pill type"></span><span class="pill demo" hidden>Demo</span><span class="pill late" hidden>Past callback time</span><span class="t-id"></span><span class="t-age"></span></div>' +
       '<div class="age-bar" aria-hidden="true"><i></i></div>' +
       '<p class="t-q"></p><div class="t-facts"></div>' +
       '<details class="convo"><summary></summary><ol></ol></details>' +
@@ -107,6 +107,7 @@
     $('.pill.p', li).hidden = t.priority > 3;
     const st = $('.pill.st', li); st.textContent = t.status; st.className = 'pill st status-' + t.status.replace(/\s+/g, '-');
     $('.pill.type', li).textContent = typeName[t.type] || t.type;
+    $('.pill.demo', li).hidden = !t.demo;
     $('.pill.late', li).hidden = !t.overdue;
     $('.t-id', li).textContent = t.id;
     $('.t-age', li).textContent = 'Opened ' + age(t.ageMin) + (t.status !== 'urgent' && t.priority <= 3 ? ', ' + t.workMin + ' of ' + t.slaMin + ' working min used' : '');
@@ -139,6 +140,7 @@
     aiOn = r.ai;
     const q = $('#ticket-queue');
     const ids = r.tickets.map((t) => t.id);
+    for (const [id, n] of nodes) if (!ids.includes(id)) { n.remove(); nodes.delete(id); knownUrgent.delete(id); }
     r.tickets.forEach((t) => {
       let li = nodes.get(t.id);
       if (!li) { li = build(t); nodes.set(t.id, li); }
@@ -154,6 +156,7 @@
     if (!typing && current !== ids.join(',')) ids.forEach((id) => q.appendChild(nodes.get(id)));
     else ids.forEach((id) => { if (!nodes.get(id).isConnected) q.prepend(nodes.get(id)); });
     $('#empty').hidden = r.tickets.length > 0;
+    $('#demo-clear').hidden = !r.tickets.some((t) => t.demo);
     const open = r.tickets.filter((t) => t.status === 'urgent' || t.status === 'needs human');
     $('#n-urgent').textContent = r.tickets.filter((t) => t.status === 'urgent').length;
     $('#n-waiting').textContent = r.tickets.filter((t) => t.status === 'needs human' && t.type !== 'booking').length;
@@ -170,7 +173,7 @@
     const h = await api('/api/health');
     const s = $('#ai-state');
     if (!h.ai) return;
-    if (!h.ai.configured) { s.textContent = 'AI off: answering from clinic file'; s.title = 'No AI key is added yet. The chat answers from the clinic details. Add a key in Render to turn AI on.'; s.className = 'ai-state off'; $('#run-ai').disabled = true; }
+    if (!h.ai.configured) { $('#ai-note').hidden = false; $('#run-ai').title = 'Add an AI key in Render first'; s.textContent = 'AI off: answering from clinic file'; s.title = 'No AI key is added yet. The chat answers from the clinic details. Add a key in Render to turn AI on.'; s.className = 'ai-state off'; $('#run-ai').disabled = true; }
     else { s.textContent = 'AI on (' + h.ai.model + ')' + (h.ai.paused ? ', paused after an error' : ''); s.className = 'ai-state on'; s.title = h.ai.lastError || 'Working'; }
   }
 
@@ -276,6 +279,15 @@
   }
   $('#run-file').addEventListener('click', () => runChecks(false));
   $('#run-ai').addEventListener('click', () => runChecks(true));
+
+  $('#demo-load').addEventListener('click', async () => {
+    const r = await api('/api/demo/load', 'POST', {});
+    if (r.ok) { toast(r.tickets.length + ' demo tickets added'); firstLoad = true; refresh(); } else toast(r.error || 'Could not add demo tickets');
+  });
+  $('#demo-clear').addEventListener('click', async () => {
+    const r = await api('/api/demo/clear', 'POST', {});
+    if (r.ok) { toast('Demo tickets removed'); refresh(); }
+  });
 
   refresh(); health();
   setInterval(refresh, 3000);

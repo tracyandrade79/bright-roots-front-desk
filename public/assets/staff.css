@@ -50,6 +50,8 @@ h2 { font-family: var(--display); font-size: 1.6rem; letter-spacing: -0.02em; ma
 .pill.status-answered { background: var(--mint); color: var(--pine-deep); }
 .pill.status-closed { background: var(--paper); }
 .pill.p { background: var(--ink); color: #fff; }
+.pill.demo { background: var(--turmeric-soft); color: var(--accent-ink); border: 1px dashed var(--turmeric); }
+.btn.small { padding: 6px 14px; font-size: .88rem; }
 .pill.late { background: var(--chili-soft); color: var(--chili); }
 .t-id { font-weight: 700; color: var(--ink-soft); font-size: .88rem; }
 .t-age { margin-left: auto; font-size: .85rem; color: var(--ink-soft); }
@@ -128,3 +130,5 @@ dialog input { border: 1.5px solid var(--line); border-radius: 10px; padding: 10
   .t-age { margin-left: 0; width: 100%; }
   .sound { margin-left: 0; }
 }
+#demo-load { background: var(--turmeric); color: var(--ink); box-shadow: none; }
+#demo-load:hover { background: color-mix(in srgb, var(--turmeric) 85%, #fff); }

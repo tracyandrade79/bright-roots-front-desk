@@ -10,6 +10,7 @@ const engine = require('./lib/engine');
 const store = require('./lib/store');
 const ai = require('./lib/ai');
 const { runChecks } = require('./lib/checks');
+const demo = require('./lib/demo');
 
 const PORT = +process.env.PORT || 3000;
 const STAFF_PIN = process.env.STAFF_PIN || '';
@@ -172,9 +173,11 @@ const server = http.createServer(async (req, res) => {
     }
 
     // ---- staff API ----
-    if (p.startsWith('/api/staff/') || p.startsWith('/api/tickets') || p === '/api/clinic' || p.startsWith('/api/clinic/') || p === '/api/selftest' || p === '/api/health') {
+    if (p.startsWith('/api/demo') || p.startsWith('/api/staff/') || p.startsWith('/api/tickets') || p === '/api/clinic' || p.startsWith('/api/clinic/') || p === '/api/selftest' || p === '/api/health') {
       if (!staffOk(req)) return send(res, 401, { error: 'Staff PIN needed', pin: true });
     }
+    if (req.method === 'POST' && p === '/api/demo/load') return send(res, 200, { ok: true, tickets: await demo.load() });
+    if (req.method === 'POST' && p === '/api/demo/clear') return send(res, 200, { ok: true, removed: demo.clear() });
     if (req.method === 'GET' && p === '/api/health') return send(res, 200, { ok: true, ai: ai.info(), pin: !!STAFF_PIN, tickets: store.db.tickets.length });
     if (req.method === 'GET' && p === '/api/tickets') return send(res, 200, { tickets: ticketList(), ai: ai.info().configured, now: Date.now() });
     let m;
