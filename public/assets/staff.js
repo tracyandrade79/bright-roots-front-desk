@@ -170,7 +170,7 @@
     const h = await api('/api/health');
     const s = $('#ai-state');
     if (!h.ai) return;
-    if (!h.ai.configured) { s.textContent = 'AI off: answering from clinic file'; s.className = 'ai-state off'; $('#run-ai').disabled = true; }
+    if (!h.ai.configured) { s.textContent = 'AI off: answering from clinic file'; s.title = 'No AI key is added yet. The chat answers from the clinic details. Add a key in Render to turn AI on.'; s.className = 'ai-state off'; $('#run-ai').disabled = true; }
     else { s.textContent = 'AI on (' + h.ai.model + ')' + (h.ai.paused ? ', paused after an error' : ''); s.className = 'ai-state on'; s.title = h.ai.lastError || 'Working'; }
   }
 
