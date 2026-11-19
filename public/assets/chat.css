@@ -94,7 +94,12 @@ html, body { height: 100%; }
 .card.done { opacity: .6; pointer-events: none; }
 
 /* quick replies with small pictures */
-.chips { display: flex; gap: 8px; overflow-x: auto; padding: 8px 14px 4px; scrollbar-width: none; }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 8px 14px 4px; scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+/* Laptops and computers with a mouse: show every button, wrapped onto two lines */
+@media (hover: hover) and (pointer: fine) {
+  .chips { flex-wrap: wrap; overflow: visible; -webkit-mask-image: none; mask-image: none; padding-top: 10px; }
+}
 .chips::-webkit-scrollbar { display: none; }
 .chip { flex: none; border: 0; border-radius: 999px; padding: 7px 14px 7px 10px; background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--mint-line); color: var(--pine); font-weight: 700; font-size: .92rem; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
 .chip svg { width: 18px; height: 18px; flex: none; }
@@ -108,7 +113,8 @@ html, body { height: 100%; }
 .send { width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--pine); color: #fff; display: grid; place-items: center; flex: none; }
 .send:hover { background: var(--pine-deep); }
 .send[disabled] { opacity: .45; }
-.foot { text-align: center; padding: 0 0 max(8px, env(safe-area-inset-bottom)); }
+.foot { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 0 0 max(8px, env(safe-area-inset-bottom)); }
+.dot-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--line); }
 .linkish { border: 0; background: none; color: var(--ink-soft); font-size: .8rem; text-decoration: underline; padding: 4px; }
 
 /* ---------- wide screens: clinic picture and details beside the chat ---------- */
